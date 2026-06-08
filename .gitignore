@@ -17,3 +17,6 @@ packages/
 [Tt]est[Rr]esult*/
 _UpgradeReport_Files/
 *.VisualState.xml
+
+## Obsidian (configuración/caché del vault)
+.obsidian/
