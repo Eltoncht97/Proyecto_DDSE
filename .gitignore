@@ -1,0 +1,19 @@
+## Visual Studio / .NET Framework
+[Bb]in/
+[Oo]bj/
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## NuGet
+packages/
+*.nupkg
+
+## Archivos temporales
+*.cache
+*.tmp
+[Tt]est[Rr]esult*/
+_UpgradeReport_Files/
+*.VisualState.xml

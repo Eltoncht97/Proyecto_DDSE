@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSources />
+  <DataSets>
+    <DataSet Name="DataSetVentas">
+      <Query>
+        <DataSourceName>RestaurantDB</DataSourceName>
+        <CommandText>usp_Reporte_VentasPorFecha</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="Fecha"><DataField>Fecha</DataField><rd:TypeName>System.DateTime</rd:TypeName></Field>
+        <Field Name="Comprobante"><DataField>Comprobante</DataField><rd:TypeName>System.String</rd:TypeName></Field>
+        <Field Name="Tipo"><DataField>Tipo</DataField><rd:TypeName>System.String</rd:TypeName></Field>
+        <Field Name="Mesa"><DataField>Mesa</DataField><rd:TypeName>System.Int32</rd:TypeName></Field>
+        <Field Name="Mozo"><DataField>Mozo</DataField><rd:TypeName>System.String</rd:TypeName></Field>
+        <Field Name="Cliente"><DataField>Cliente</DataField><rd:TypeName>System.String</rd:TypeName></Field>
+        <Field Name="SubTotal"><DataField>SubTotal</DataField><rd:TypeName>System.Decimal</rd:TypeName></Field>
+        <Field Name="Igv"><DataField>Igv</DataField><rd:TypeName>System.Decimal</rd:TypeName></Field>
+        <Field Name="Total"><DataField>Total</DataField><rd:TypeName>System.Decimal</rd:TypeName></Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Textbox Name="txtTitulo">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Reporte de Ventas - Restaurante</Value>
+                    <Style><FontSize>16pt</FontSize><FontWeight>Bold</FontWeight><Color>#007ACC</Color></Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>0in</Top>
+            <Left>0in</Left>
+            <Height>0.35in</Height>
+            <Width>7.5in</Width>
+            <Style><Border><Style>None</Style></Border></Style>
+          </Textbox>
+          <Tablix Name="TablaVentas">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn><Width>1.2in</Width></TablixColumn>
+                <TablixColumn><Width>1in</Width></TablixColumn>
+                <TablixColumn><Width>0.7in</Width></TablixColumn>
+                <TablixColumn><Width>0.5in</Width></TablixColumn>
+                <TablixColumn><Width>1.3in</Width></TablixColumn>
+                <TablixColumn><Width>1.3in</Width></TablixColumn>
+                <TablixColumn><Width>0.8in</Width></TablixColumn>
+                <TablixColumn><Width>0.7in</Width></TablixColumn>
+                <TablixColumn><Width>0.8in</Width></TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.3in</Height>
+                  <TablixCells>
+                    <TablixCell><CellContents><Textbox Name="hFecha"><Paragraphs><Paragraph><TextRuns><TextRun><Value>Fecha</Value><Style><FontWeight>Bold</FontWeight><Color>White</Color></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><Style><BackgroundColor>#007ACC</BackgroundColor><Border><Style>Solid</Style></Border></Style></Textbox></CellContents></TablixCell>
+                    <TablixCell><CellContents><Textbox Name="hComprobante"><Paragraphs><Paragraph><TextRuns><TextRun><Value>Comprobante</Value><Style><FontWeight>Bold</FontWeight><Color>White</Color></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><Style><BackgroundColor>#007ACC</BackgroundColor><Border><Style>Solid</Style></Border></Style></Textbox></CellContents></TablixCell>
+                    <TablixCell><CellContents><Textbox Name="hTipo"><Paragraphs><Paragraph><TextRuns><TextRun><Value>Tipo</Value><Style><FontWeight>Bold</FontWeight><Color>White</Color></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><Style><BackgroundColor>#007ACC</BackgroundColor><Border><Style>Solid</Style></Border></Style></Textbox></CellContents></TablixCell>
+                    <TablixCell><CellContents><Textbox Name="hMesa"><Paragraphs><Paragraph><TextRuns><TextRun><Value>Mesa</Value><Style><FontWeight>Bold</FontWeight><Color>White</Color></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><Style><BackgroundColor>#007ACC</BackgroundColor><Border><Style>Solid</Style></Border></Style></Textbox></CellContents></TablixCell>
+                    <TablixCell><CellContents><Textbox Name="hMozo"><Paragraphs><Paragraph><TextRuns><TextRun><Value>Mozo</Value><Style><FontWeight>Bold</FontWeight><Color>White</Color></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><Style><BackgroundColor>#007ACC</BackgroundColor><Border><Style>Solid</Style></Border></Style></Textbox></CellContents></TablixCell>
+                    <TablixCell><CellContents><Textbox Name="hCliente"><Paragraphs><Paragraph><TextRuns><TextRun><Value>Cliente</Value><Style><FontWeight>Bold</FontWeight><Color>White</Color></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><Style><BackgroundColor>#007ACC</BackgroundColor><Border><Style>Solid</Style></Border></Style></Textbox></CellContents></TablixCell>
+                    <TablixCell><CellContents><Textbox Name="hSubTotal"><Paragraphs><Paragraph><TextRuns><TextRun><Value>SubTotal</Value><Style><FontWeight>Bold</FontWeight><Color>White</Color></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><Style><BackgroundColor>#007ACC</BackgroundColor><Border><Style>Solid</Style></Border></Style></Textbox></CellContents></TablixCell>
+                    <TablixCell><CellContents><Textbox Name="hIgv"><Paragraphs><Paragraph><TextRuns><TextRun><Value>IGV</Value><Style><FontWeight>Bold</FontWeight><Color>White</Color></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><Style><BackgroundColor>#007ACC</BackgroundColor><Border><Style>Solid</Style></Border></Style></Textbox></CellContents></TablixCell>
+                    <TablixCell><CellContents><Textbox Name="hTotal"><Paragraphs><Paragraph><TextRuns><TextRun><Value>Total</Value><Style><FontWeight>Bold</FontWeight><Color>White</Color></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><Style><BackgroundColor>#007ACC</BackgroundColor><Border><Style>Solid</Style></Border></Style></Textbox></CellContents></TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.25in</Height>
+                  <TablixCells>
+                    <TablixCell><CellContents><Textbox Name="Fecha"><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!Fecha.Value</Value><Style><Format>dd/MM/yyyy</Format></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><Style><Border><Style>Solid</Style></Border></Style></Textbox></CellContents></TablixCell>
+                    <TablixCell><CellContents><Textbox Name="Comprobante"><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!Comprobante.Value</Value><Style /></TextRun></TextRuns><Style /></Paragraph></Paragraphs><Style><Border><Style>Solid</Style></Border></Style></Textbox></CellContents></TablixCell>
+                    <TablixCell><CellContents><Textbox Name="Tipo"><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!Tipo.Value</Value><Style /></TextRun></TextRuns><Style /></Paragraph></Paragraphs><Style><Border><Style>Solid</Style></Border></Style></Textbox></CellContents></TablixCell>
+                    <TablixCell><CellContents><Textbox Name="Mesa"><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!Mesa.Value</Value><Style /></TextRun></TextRuns><Style /></Paragraph></Paragraphs><Style><Border><Style>Solid</Style></Border></Style></Textbox></CellContents></TablixCell>
+                    <TablixCell><CellContents><Textbox Name="Mozo"><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!Mozo.Value</Value><Style /></TextRun></TextRuns><Style /></Paragraph></Paragraphs><Style><Border><Style>Solid</Style></Border></Style></Textbox></CellContents></TablixCell>
+                    <TablixCell><CellContents><Textbox Name="Cliente"><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!Cliente.Value</Value><Style /></TextRun></TextRuns><Style /></Paragraph></Paragraphs><Style><Border><Style>Solid</Style></Border></Style></Textbox></CellContents></TablixCell>
+                    <TablixCell><CellContents><Textbox Name="SubTotal"><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!SubTotal.Value</Value><Style><Format>N2</Format></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><Style><Border><Style>Solid</Style></Border></Style></Textbox></CellContents></TablixCell>
+                    <TablixCell><CellContents><Textbox Name="Igv"><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!Igv.Value</Value><Style><Format>N2</Format></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><Style><Border><Style>Solid</Style></Border></Style></Textbox></CellContents></TablixCell>
+                    <TablixCell><CellContents><Textbox Name="Total"><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!Total.Value</Value><Style><Format>N2</Format></Style></TextRun></TextRuns><Style /></Paragraph></Paragraphs><Style><Border><Style>Solid</Style></Border></Style></Textbox></CellContents></TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember /><TablixMember /><TablixMember /><TablixMember /><TablixMember /><TablixMember /><TablixMember /><TablixMember /><TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember><KeepWithGroup>After</KeepWithGroup></TablixMember>
+                <TablixMember>
+                  <Group Name="Detalle" />
+                  <TablixMembers><TablixMember /></TablixMembers>
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <DataSetName>DataSetVentas</DataSetName>
+            <Top>0.45in</Top>
+            <Left>0in</Left>
+            <Height>0.55in</Height>
+            <Width>9.1in</Width>
+            <Style><Border><Style>None</Style></Border></Style>
+          </Tablix>
+        </ReportItems>
+        <Height>1.2in</Height>
+        <Style />
+      </Body>
+      <Width>9.1in</Width>
+      <Page>
+        <PageHeight>21cm</PageHeight>
+        <PageWidth>29.7cm</PageWidth>
+        <LeftMargin>1cm</LeftMargin>
+        <RightMargin>1cm</RightMargin>
+        <TopMargin>1cm</TopMargin>
+        <BottomMargin>1cm</BottomMargin>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+</Report>
