@@ -2,6 +2,7 @@ using System;
 using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
+using Restaurant.Presentacion.Estilos;
 
 namespace Restaurant.Presentacion
 {
@@ -16,6 +17,8 @@ namespace Restaurant.Presentacion
 
         private void FrmPrincipal_Load(object sender, EventArgs e)
         {
+            TemaModerno.EstilizarFormulario(this);
+
             if (Program.UsuarioActual != null)
             {
                 lblUsuario.Text = "Usuario: " + Program.UsuarioActual.NombreCompleto +

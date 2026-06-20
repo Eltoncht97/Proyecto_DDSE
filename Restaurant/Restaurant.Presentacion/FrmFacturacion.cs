@@ -3,6 +3,8 @@ using System.Data;
 using System.Windows.Forms;
 using Restaurant.Entidades;
 using Restaurant.Negocio;
+using Restaurant.Presentacion.Estilos;
+using Restaurant.Presentacion.Iconos;
 
 namespace Restaurant.Presentacion
 {
@@ -21,6 +23,13 @@ namespace Restaurant.Presentacion
 
         private void FrmFacturacion_Load(object sender, EventArgs e)
         {
+            TemaModerno.EstilizarFormulario(this);
+            TemaModerno.EstilizarComboBox(cboTipo);
+            TemaModerno.EstilizarBotonSuccess(btnFacturar);
+            TemaModerno.EstilizarBotonSecundario(btnRefrescar);
+            btnFacturar.Text = IconosUI.Facturar;
+            btnRefrescar.Text = IconosUI.Refrescar;
+
             cboTipo.Items.AddRange(new object[] { "Boleta", "Factura" });
             cboTipo.SelectedItem = "Boleta";
             ListarPendientes();
@@ -36,6 +45,7 @@ namespace Restaurant.Presentacion
             };
             dgvPedidos.DataSource = vista;
             FormatearPedidos();
+            TemaModerno.EstilizarDataGridView(dgvPedidos);
 
             // limpiar selección
             _idPedidoSel = 0;

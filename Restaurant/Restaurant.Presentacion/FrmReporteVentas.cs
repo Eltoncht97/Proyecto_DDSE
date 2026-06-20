@@ -2,6 +2,8 @@ using System;
 using System.Data;
 using System.Windows.Forms;
 using Restaurant.Negocio;
+using Restaurant.Presentacion.Estilos;
+using Restaurant.Presentacion.Iconos;
 
 namespace Restaurant.Presentacion
 {
@@ -16,6 +18,12 @@ namespace Restaurant.Presentacion
 
         private void FrmReporteVentas_Load(object sender, EventArgs e)
         {
+            TemaModerno.EstilizarFormulario(this);
+            TemaModerno.EstilizarDateTimePicker(dtpDesde);
+            TemaModerno.EstilizarDateTimePicker(dtpHasta);
+            TemaModerno.EstilizarBotonSuccess(btnGenerar);
+            btnGenerar.Text = IconosUI.Generar;
+
             DateTime hoy = DateTime.Today;
             dtpDesde.Value = new DateTime(hoy.Year, hoy.Month, 1);
             dtpHasta.Value = hoy;

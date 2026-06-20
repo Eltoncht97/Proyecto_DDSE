@@ -4,6 +4,8 @@ using System.Linq;
 using System.Windows.Forms;
 using Restaurant.Entidades;
 using Restaurant.Negocio;
+using Restaurant.Presentacion.Estilos;
+using Restaurant.Presentacion.Iconos;
 
 namespace Restaurant.Presentacion
 {
@@ -24,6 +26,21 @@ namespace Restaurant.Presentacion
 
         private void FrmPedido_Load(object sender, EventArgs e)
         {
+            TemaModerno.EstilizarFormulario(this);
+            TemaModerno.EstilizarComboBox(cboMesa);
+            TemaModerno.EstilizarComboBox(cboMozo);
+            TemaModerno.EstilizarComboBox(cboCliente);
+            TemaModerno.EstilizarComboBox(cboPlato);
+            TemaModerno.EstilizarNumericUpDown(nudCantidad);
+            TemaModerno.EstilizarBotonSuccess(btnAgregar);
+            TemaModerno.EstilizarBotonDanger(btnQuitar);
+            TemaModerno.EstilizarBotonSuccess(btnRegistrar);
+            TemaModerno.EstilizarBotonSecundario(btnNuevo);
+            btnAgregar.Text = IconosUI.Agregar;
+            btnQuitar.Text = IconosUI.Quitar;
+            btnRegistrar.Text = IconosUI.Guardar;
+            btnNuevo.Text = IconosUI.Nuevo;
+
             cboMesa.DataSource = _mesaBll.ListarActivas();
             cboMesa.DisplayMember = "Numero";
             cboMesa.ValueMember = "IdMesa";
@@ -45,6 +62,7 @@ namespace Restaurant.Presentacion
             dgvDetalle.AutoGenerateColumns = true;
             dgvDetalle.DataSource = _detalle;
             FormatearDetalle();
+            TemaModerno.EstilizarDataGridView(dgvDetalle);
             ActualizarTotal();
         }
 

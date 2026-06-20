@@ -2,6 +2,8 @@ using System;
 using System.Windows.Forms;
 using Restaurant.Entidades;
 using Restaurant.Negocio;
+using Restaurant.Presentacion.Estilos;
+using Restaurant.Presentacion.Iconos;
 
 namespace Restaurant.Presentacion
 {
@@ -18,6 +20,21 @@ namespace Restaurant.Presentacion
 
         private void FrmPlato_Load(object sender, EventArgs e)
         {
+            TemaModerno.EstilizarFormulario(this);
+            TemaModerno.EstilizarTextBox(txtNombre);
+            TemaModerno.EstilizarTextBox(txtDescripcion);
+            TemaModerno.EstilizarNumericUpDown(nudPrecio);
+            TemaModerno.EstilizarComboBox(cboCategoria);
+            TemaModerno.EstilizarCheckBox(chkDisponible);
+            TemaModerno.EstilizarBotonSuccess(btnGuardar);
+            TemaModerno.EstilizarBotonDanger(btnEliminar);
+            TemaModerno.EstilizarBotonSecundario(btnNuevo);
+            TemaModerno.EstilizarBotonSecundario(btnCancelar);
+            btnNuevo.Text = IconosUI.Nuevo;
+            btnGuardar.Text = IconosUI.Guardar;
+            btnEliminar.Text = IconosUI.Eliminar;
+            btnCancelar.Text = IconosUI.Cancelar;
+
             CargarCategorias();
             Listar();
             LimpiarFormulario();

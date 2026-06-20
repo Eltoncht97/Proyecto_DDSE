@@ -47,5 +47,11 @@ Esta nota es el **centro** del vault: desde aquí llegas a todo.
 - [[ComboBox enlazado]]
 - [[Programa y MDI]]
 
+### Estilos Visuales (Tema Moderno)
+- [[Cheat Sheet - Cómo Usar Estilos]] ⚡ — Referencia rápida (empieza aquí)
+- [[Tema Moderno]] — Paleta de colores, métodos de estilo, arquitectura centralizada
+- [[Iconografía]] — Emojis en botones (IconosUI.cs)
+- [[Integración en Arquitectura Multicapa]] — Cómo TemaModerno + IconosUI se conectan con las 4 capas
+
 ### Curso
 - [[Temas del curso (T1-T6)]]
