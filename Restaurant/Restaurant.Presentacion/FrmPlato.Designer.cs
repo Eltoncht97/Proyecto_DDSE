@@ -188,6 +188,7 @@ namespace Restaurant.Presentacion
             this.dgvLista.AllowUserToDeleteRows = false;
             this.dgvLista.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvLista.Location = new System.Drawing.Point(16, 235);
+            this.dgvLista.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvLista.MultiSelect = false;
             this.dgvLista.Name = "dgvLista";
             this.dgvLista.ReadOnly = true;

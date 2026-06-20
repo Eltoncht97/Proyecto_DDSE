@@ -187,13 +187,14 @@ namespace Restaurant.Presentacion
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-            // 
+            //
             // dgvLista
-            // 
+            //
             this.dgvLista.AllowUserToAddRows = false;
             this.dgvLista.AllowUserToDeleteRows = false;
             this.dgvLista.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvLista.Location = new System.Drawing.Point(18, 315);
+            this.dgvLista.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvLista.MultiSelect = false;
             this.dgvLista.Name = "dgvLista";
             this.dgvLista.ReadOnly = true;
