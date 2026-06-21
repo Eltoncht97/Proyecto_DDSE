@@ -20,9 +20,11 @@ namespace Restaurant.Presentacion
         private void FrmCategoria_Load(object sender, EventArgs e)
         {
             TemaModerno.EstilizarFormulario(this);
+            TemaModerno.EstilizarTitulo(lblTitulo);
             TemaModerno.EstilizarTextBox(txtNombre);
             TemaModerno.EstilizarTextBox(txtDescripcion);
             TemaModerno.EstilizarCheckBox(chkEstado);
+            TemaModerno.EstilizarDataGridView(dgvLista);
             TemaModerno.EstilizarBotonSuccess(btnGuardar);
             TemaModerno.EstilizarBotonDanger(btnEliminar);
             TemaModerno.EstilizarBotonSecundario(btnNuevo);
@@ -34,6 +36,10 @@ namespace Restaurant.Presentacion
 
             Listar();
             LimpiarFormulario();
+
+            TemaModerno.UniformarEntradas(this, 380);
+            TemaModerno.AgregarTarjetaReferencia(this, "categoria.png");
+            TemaModerno.AplicarBarraTitulo(this);
         }
 
         private void Listar()

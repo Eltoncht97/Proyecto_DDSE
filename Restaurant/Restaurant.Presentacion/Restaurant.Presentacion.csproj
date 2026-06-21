@@ -112,10 +112,22 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Reportes\ReporteVentas.rdlc" />
+    <EmbeddedResource Include="FrmCategoria.resx">
+      <DependentUpon>FrmCategoria.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmEmpleado.resx">
       <DependentUpon>FrmEmpleado.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Recursos\fondo_app.png" />
+    <EmbeddedResource Include="Recursos\Imagenes\categoria.png" />
+    <EmbeddedResource Include="Recursos\Imagenes\plato.png" />
+    <EmbeddedResource Include="Recursos\Imagenes\empleado.png" />
+    <EmbeddedResource Include="Recursos\Imagenes\cliente.png" />
+    <EmbeddedResource Include="Recursos\Imagenes\mesa.png" />
+    <EmbeddedResource Include="Recursos\Imagenes\pedido.png" />
+    <EmbeddedResource Include="Recursos\Imagenes\facturacion.png" />
+    <EmbeddedResource Include="Recursos\Imagenes\reporte.png" />
+    <EmbeddedResource Include="Recursos\Imagenes\login.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Restaurant.Entidades\Restaurant.Entidades.csproj">

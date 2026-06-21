@@ -32,7 +32,7 @@ namespace Restaurant.Presentacion
             //
             this.lblTitulo.AutoSize = true;
             this.lblTitulo.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
-            this.lblTitulo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.lblTitulo.ForeColor = System.Drawing.Color.FromArgb(70, 70, 70);
             this.lblTitulo.Location = new System.Drawing.Point(16, 12);
             this.lblTitulo.Name = "lblTitulo";
             this.lblTitulo.Size = new System.Drawing.Size(204, 25);
@@ -75,7 +75,7 @@ namespace Restaurant.Presentacion
             //
             // btnGenerar
             //
-            this.btnGenerar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btnGenerar.BackColor = System.Drawing.Color.FromArgb(70, 70, 70);
             this.btnGenerar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGenerar.ForeColor = System.Drawing.Color.White;
             this.btnGenerar.Location = new System.Drawing.Point(400, 50);
@@ -122,7 +122,7 @@ namespace Restaurant.Presentacion
             //
             this.lblTotal.AutoSize = true;
             this.lblTotal.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.lblTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.lblTotal.ForeColor = System.Drawing.Color.FromArgb(70, 70, 70);
             this.lblTotal.Location = new System.Drawing.Point(769, 450);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(55, 21);
@@ -133,7 +133,7 @@ namespace Restaurant.Presentacion
             //
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(892, 485);
+            this.ClientSize = new System.Drawing.Size(1090, 485);
             this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.lblTotalTexto);
             this.Controls.Add(this.lblRegistros);

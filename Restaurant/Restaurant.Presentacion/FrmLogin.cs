@@ -19,12 +19,14 @@ namespace Restaurant.Presentacion
         private void FrmLogin_Load(object sender, EventArgs e)
         {
             TemaModerno.EstilizarFormulario(this);
+            TemaModerno.EstilizarTitulo(lblTitulo);
             TemaModerno.EstilizarTextBox(txtUsuario);
             TemaModerno.EstilizarTextBox(txtClave);
             TemaModerno.EstilizarBotonSuccess(btnIngresar);
             TemaModerno.EstilizarBotonSecundario(btnCancelar);
             btnIngresar.Text = IconosUI.Login;
             btnCancelar.Text = IconosUI.Cancelar;
+            TemaModerno.AgregarTarjetaReferencia(this, "login.png");
         }
 
         private void btnIngresar_Click(object sender, EventArgs e)

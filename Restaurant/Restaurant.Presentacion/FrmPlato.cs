@@ -21,11 +21,14 @@ namespace Restaurant.Presentacion
         private void FrmPlato_Load(object sender, EventArgs e)
         {
             TemaModerno.EstilizarFormulario(this);
+            TemaModerno.EstilizarTitulo(lblTitulo);
             TemaModerno.EstilizarTextBox(txtNombre);
             TemaModerno.EstilizarTextBox(txtDescripcion);
             TemaModerno.EstilizarNumericUpDown(nudPrecio);
             TemaModerno.EstilizarComboBox(cboCategoria);
             TemaModerno.EstilizarCheckBox(chkDisponible);
+            TemaModerno.EstilizarCheckBox(chkEstado);
+            TemaModerno.EstilizarDataGridView(dgvLista);
             TemaModerno.EstilizarBotonSuccess(btnGuardar);
             TemaModerno.EstilizarBotonDanger(btnEliminar);
             TemaModerno.EstilizarBotonSecundario(btnNuevo);
@@ -38,6 +41,9 @@ namespace Restaurant.Presentacion
             CargarCategorias();
             Listar();
             LimpiarFormulario();
+            TemaModerno.UniformarEntradas(this, 380);
+            TemaModerno.AgregarTarjetaReferencia(this, "plato.png");
+            TemaModerno.AplicarBarraTitulo(this);
         }
 
         private void CargarCategorias()

@@ -43,7 +43,7 @@ namespace Restaurant.Presentacion
             //
             this.lblTitulo.AutoSize = true;
             this.lblTitulo.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
-            this.lblTitulo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.lblTitulo.ForeColor = System.Drawing.Color.FromArgb(70, 70, 70);
             this.lblTitulo.Location = new System.Drawing.Point(16, 12);
             this.lblTitulo.Name = "lblTitulo";
             this.lblTitulo.Size = new System.Drawing.Size(196, 25);
@@ -199,7 +199,7 @@ namespace Restaurant.Presentacion
             //
             this.lblTotal.AutoSize = true;
             this.lblTotal.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.lblTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.lblTotal.ForeColor = System.Drawing.Color.FromArgb(70, 70, 70);
             this.lblTotal.Location = new System.Drawing.Point(600, 412);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(40, 21);
@@ -208,7 +208,7 @@ namespace Restaurant.Presentacion
             //
             // btnRegistrar
             //
-            this.btnRegistrar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btnRegistrar.BackColor = System.Drawing.Color.FromArgb(70, 70, 70);
             this.btnRegistrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRegistrar.ForeColor = System.Drawing.Color.White;
             this.btnRegistrar.Location = new System.Drawing.Point(490, 450);
@@ -233,7 +233,7 @@ namespace Restaurant.Presentacion
             //
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(756, 505);
+            this.ClientSize = new System.Drawing.Size(964, 505);
             this.Controls.Add(this.btnNuevo);
             this.Controls.Add(this.btnRegistrar);
             this.Controls.Add(this.lblTotal);

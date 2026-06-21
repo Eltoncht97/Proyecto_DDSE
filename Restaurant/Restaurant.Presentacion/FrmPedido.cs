@@ -27,6 +27,7 @@ namespace Restaurant.Presentacion
         private void FrmPedido_Load(object sender, EventArgs e)
         {
             TemaModerno.EstilizarFormulario(this);
+            TemaModerno.EstilizarTitulo(lblTitulo);
             TemaModerno.EstilizarComboBox(cboMesa);
             TemaModerno.EstilizarComboBox(cboMozo);
             TemaModerno.EstilizarComboBox(cboCliente);
@@ -63,7 +64,10 @@ namespace Restaurant.Presentacion
             dgvDetalle.DataSource = _detalle;
             FormatearDetalle();
             TemaModerno.EstilizarDataGridView(dgvDetalle);
+            TemaModerno.EstilizarTotal(lblTotal);
             ActualizarTotal();
+            TemaModerno.AgregarTarjetaReferencia(this, "pedido.png");
+            TemaModerno.AplicarBarraTitulo(this);
         }
 
         private void FormatearDetalle()

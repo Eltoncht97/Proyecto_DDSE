@@ -20,6 +20,7 @@ namespace Restaurant.Presentacion
         private void FrmCliente_Load(object sender, EventArgs e)
         {
             TemaModerno.EstilizarFormulario(this);
+            TemaModerno.EstilizarTitulo(lblTitulo);
             TemaModerno.EstilizarTextBox(txtNombres);
             TemaModerno.EstilizarTextBox(txtApellidos);
             TemaModerno.EstilizarTextBox(txtDocumento);
@@ -31,6 +32,7 @@ namespace Restaurant.Presentacion
             TemaModerno.EstilizarBotonDanger(btnEliminar);
             TemaModerno.EstilizarBotonSecundario(btnNuevo);
             TemaModerno.EstilizarBotonSecundario(btnCancelar);
+            TemaModerno.EstilizarDataGridView(dgvLista);
             btnNuevo.Text = IconosUI.Nuevo;
             btnGuardar.Text = IconosUI.Guardar;
             btnEliminar.Text = IconosUI.Eliminar;
@@ -38,6 +40,9 @@ namespace Restaurant.Presentacion
 
             Listar();
             LimpiarFormulario();
+            TemaModerno.UniformarEntradas(this, 380);
+            TemaModerno.AgregarTarjetaReferencia(this, "cliente.png");
+            TemaModerno.AplicarBarraTitulo(this);
         }
 
         private void Listar()

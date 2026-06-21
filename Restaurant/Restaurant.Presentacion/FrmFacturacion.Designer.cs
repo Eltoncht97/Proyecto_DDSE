@@ -34,7 +34,7 @@ namespace Restaurant.Presentacion
             //
             this.lblTitulo.AutoSize = true;
             this.lblTitulo.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
-            this.lblTitulo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.lblTitulo.ForeColor = System.Drawing.Color.FromArgb(70, 70, 70);
             this.lblTitulo.Location = new System.Drawing.Point(16, 12);
             this.lblTitulo.Name = "lblTitulo";
             this.lblTitulo.Size = new System.Drawing.Size(269, 25);
@@ -119,7 +119,7 @@ namespace Restaurant.Presentacion
             //
             this.lblTotal.AutoSize = true;
             this.lblTotal.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.lblTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.lblTotal.ForeColor = System.Drawing.Color.FromArgb(70, 70, 70);
             this.lblTotal.Location = new System.Drawing.Point(625, 360);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(40, 21);
@@ -128,7 +128,7 @@ namespace Restaurant.Presentacion
             //
             // btnFacturar
             //
-            this.btnFacturar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btnFacturar.BackColor = System.Drawing.Color.FromArgb(70, 70, 70);
             this.btnFacturar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFacturar.ForeColor = System.Drawing.Color.White;
             this.btnFacturar.Location = new System.Drawing.Point(540, 400);
@@ -153,7 +153,7 @@ namespace Restaurant.Presentacion
             //
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(792, 480);
+            this.ClientSize = new System.Drawing.Size(1000, 480);
             this.Controls.Add(this.btnRefrescar);
             this.Controls.Add(this.btnFacturar);
             this.Controls.Add(this.lblTotal);

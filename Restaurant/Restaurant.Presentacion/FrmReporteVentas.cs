@@ -19,14 +19,20 @@ namespace Restaurant.Presentacion
         private void FrmReporteVentas_Load(object sender, EventArgs e)
         {
             TemaModerno.EstilizarFormulario(this);
+            TemaModerno.EstilizarTitulo(lblTitulo);
             TemaModerno.EstilizarDateTimePicker(dtpDesde);
             TemaModerno.EstilizarDateTimePicker(dtpHasta);
             TemaModerno.EstilizarBotonSuccess(btnGenerar);
+            TemaModerno.EstilizarDataGridView(dgvReporte);
+            TemaModerno.EstilizarTotal(lblTotal);
             btnGenerar.Text = IconosUI.Generar;
 
             DateTime hoy = DateTime.Today;
             dtpDesde.Value = new DateTime(hoy.Year, hoy.Month, 1);
             dtpHasta.Value = hoy;
+
+            TemaModerno.AgregarTarjetaReferencia(this, "reporte.png");
+            TemaModerno.AplicarBarraTitulo(this);
         }
 
         private void btnGenerar_Click(object sender, EventArgs e)

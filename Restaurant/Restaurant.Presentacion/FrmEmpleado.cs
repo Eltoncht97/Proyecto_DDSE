@@ -20,6 +20,7 @@ namespace Restaurant.Presentacion
         private void FrmEmpleado_Load(object sender, EventArgs e)
         {
             TemaModerno.EstilizarFormulario(this);
+            TemaModerno.EstilizarTitulo(lblTitulo);
             TemaModerno.EstilizarTextBox(txtNombres);
             TemaModerno.EstilizarTextBox(txtApellidos);
             TemaModerno.EstilizarTextBox(txtDni);
@@ -30,6 +31,7 @@ namespace Restaurant.Presentacion
             TemaModerno.EstilizarBotonDanger(btnEliminar);
             TemaModerno.EstilizarBotonSecundario(btnNuevo);
             TemaModerno.EstilizarBotonSecundario(btnCancelar);
+            TemaModerno.EstilizarDataGridView(dgvLista);
             btnNuevo.Text = IconosUI.Nuevo;
             btnGuardar.Text = IconosUI.Guardar;
             btnEliminar.Text = IconosUI.Eliminar;
@@ -38,6 +40,9 @@ namespace Restaurant.Presentacion
             cboCargo.Items.AddRange(new object[] { "Mozo", "Cajero", "Cocinero", "Administrador" });
             Listar();
             LimpiarFormulario();
+            TemaModerno.UniformarEntradas(this, 380);
+            TemaModerno.AgregarTarjetaReferencia(this, "empleado.png");
+            TemaModerno.AplicarBarraTitulo(this);
         }
 
         private void Listar()

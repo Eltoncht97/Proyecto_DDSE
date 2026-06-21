@@ -20,14 +20,17 @@ namespace Restaurant.Presentacion
         private void FrmMesa_Load(object sender, EventArgs e)
         {
             TemaModerno.EstilizarFormulario(this);
+            TemaModerno.EstilizarTitulo(lblTitulo);
             TemaModerno.EstilizarNumericUpDown(nudNumero);
             TemaModerno.EstilizarNumericUpDown(nudCapacidad);
+            TemaModerno.EstilizarTextBox(txtUbicacion);
             TemaModerno.EstilizarComboBox(cboSituacion);
             TemaModerno.EstilizarCheckBox(chkEstado);
             TemaModerno.EstilizarBotonSuccess(btnGuardar);
             TemaModerno.EstilizarBotonDanger(btnEliminar);
             TemaModerno.EstilizarBotonSecundario(btnNuevo);
             TemaModerno.EstilizarBotonSecundario(btnCancelar);
+            TemaModerno.EstilizarDataGridView(dgvLista);
             btnNuevo.Text = IconosUI.Nuevo;
             btnGuardar.Text = IconosUI.Guardar;
             btnEliminar.Text = IconosUI.Eliminar;
@@ -36,6 +39,9 @@ namespace Restaurant.Presentacion
             cboSituacion.Items.AddRange(new object[] { "Libre", "Ocupada", "Reservada" });
             Listar();
             LimpiarFormulario();
+            TemaModerno.UniformarEntradas(this, 380);
+            TemaModerno.AgregarTarjetaReferencia(this, "mesa.png");
+            TemaModerno.AplicarBarraTitulo(this);
         }
 
         private void Listar()

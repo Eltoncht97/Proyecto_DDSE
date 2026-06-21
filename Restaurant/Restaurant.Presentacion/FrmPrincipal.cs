@@ -18,6 +18,8 @@ namespace Restaurant.Presentacion
         private void FrmPrincipal_Load(object sender, EventArgs e)
         {
             TemaModerno.EstilizarFormulario(this);
+            TemaModerno.EstilizarMenu(menuPrincipal);
+            TemaModerno.EstilizarStatus(statusBar);
 
             if (Program.UsuarioActual != null)
             {

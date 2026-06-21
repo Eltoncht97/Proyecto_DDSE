@@ -24,7 +24,10 @@ namespace Restaurant.Presentacion
         private void FrmFacturacion_Load(object sender, EventArgs e)
         {
             TemaModerno.EstilizarFormulario(this);
+            TemaModerno.EstilizarTitulo(lblTitulo);
             TemaModerno.EstilizarComboBox(cboTipo);
+            TemaModerno.EstilizarDataGridView(dgvDetalle);
+            TemaModerno.EstilizarTotal(lblTotal);
             TemaModerno.EstilizarBotonSuccess(btnFacturar);
             TemaModerno.EstilizarBotonSecundario(btnRefrescar);
             btnFacturar.Text = IconosUI.Facturar;
@@ -33,6 +36,8 @@ namespace Restaurant.Presentacion
             cboTipo.Items.AddRange(new object[] { "Boleta", "Factura" });
             cboTipo.SelectedItem = "Boleta";
             ListarPendientes();
+            TemaModerno.AgregarTarjetaReferencia(this, "facturacion.png");
+            TemaModerno.AplicarBarraTitulo(this);
         }
 
         private void ListarPendientes()
