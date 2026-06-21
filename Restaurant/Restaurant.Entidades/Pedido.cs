@@ -20,6 +20,16 @@ namespace Restaurant.Entidades
 
         public List<DetallePedido> Detalles { get; set; }
 
+        // Texto para combos/listados de selección de pedido.
+        public string Resumen
+        {
+            get
+            {
+                return "N° " + IdPedido + "  ·  Mesa " + Mesa + "  ·  " + Cliente +
+                       "  ·  S/ " + Total.ToString("N2") + "  ·  " + Situacion;
+            }
+        }
+
         public Pedido()
         {
             Fecha = DateTime.Now;

@@ -13,7 +13,7 @@ Los estilos visuales (TemaModerno.cs + IconosUI.cs) se integran **únicamente en
 ├─────────────────────────────────────────────────────┤
 │  Capa de Negocio (BLL)                              │
 │  - Reglas de negocio                                │
-│  - Validaciones ([LINQ]])                           │
+│  - Validaciones (LINQ)                              │
 │  - NO se toca                                        │
 ├─────────────────────────────────────────────────────┤
 │  Capa de Datos (DAO)                                │
@@ -48,11 +48,15 @@ Restaurant.sln (Solución)
     │   └── TemaModerno.cs         ← Nueva clase de estilos
     ├── Iconos/                    ← Nueva carpeta
     │   └── IconosUI.cs            ← Nuevas constantes de emojis
+    ├── Recursos/
+    │   └── Imagenes/*.png         ← Tarjetas referenciales + fondo_app.png
     ├── FrmCategoria.cs            ← Usa TemaModerno + IconosUI
     ├── FrmPlato.cs                ← Usa TemaModerno + IconosUI
     ├── FrmEmpleado.cs             ← Usa TemaModerno + IconosUI
     └── ... (resto de Frm*.cs)
 ```
+
+> [!note] Todo lo visual vive en **Presentación**. Además de la paleta gris, ahí están: las **imágenes referenciales** (`Recursos/Imagenes/*.png`, una tarjeta cuadrada 200x200 por ventana que `AgregarTarjetaReferencia` coloca arriba-derecha) y la **barra de título gris para ventanas hijas MDI** (`AplicarBarraTitulo`, que reemplaza el marco nativo blanco — irrecolorable en hijas MDI — por una barra propia con minimizar/maximizar/cerrar y arrastre). Negocio, Datos y Entidades no saben nada de esto.
 
 ---
 
@@ -86,7 +90,7 @@ Restaurant.sln (Solución)
       │
       ├─ Abre conexión a BD
       │
-      ├─ Ejecuta stored procedure @sp_Categoria_Insertar
+      ├─ Ejecuta stored procedure usp_Categoria_Insertar
       │
       └─ Cierra conexión
             │
@@ -105,7 +109,7 @@ RESULTADO: Categoría guardada en BD + Usuario ve botón bonito en pantalla
 ### TemaModerno.cs (Estilo)
 
 **Responsabilidad:**
-> Definir colores, bordes, tamaños, fuentes — solo visual.
+> Definir colores (escala de grises), bordes, tamaños, fuentes — solo visual.
 
 **No decide:**
 - Si la categoría debe guardarse
@@ -118,11 +122,15 @@ RESULTADO: Categoría guardada en BD + Usuario ve botón bonito en pantalla
 // TemaModerno.cs define CÓMO se ve el botón
 public static void EstilizarBotonSuccess(Button btn)
 {
-    btn.BackColor = Colores.Exito;  // Verde
+    btn.BackColor = Colores.Exito;  // Gris oscuro RGB(70,70,70) — acción primaria
+    btn.ForeColor = Colores.Blanco; // Texto blanco
+    btn.FlatStyle = FlatStyle.Flat; // Plano, sin relieve
     btn.Height = 36;                 // Tamaño
     // ... etc
 }
 ```
+
+> [!info] Toda la UI es 100% escala de grises (plana y minimalista). Los botones se diferencian solo por **intensidad de gris**, nunca por color: `Exito` = gris oscuro (Guardar), `Alerta` = gris medio (Eliminar). No hay azul/verde/rojo.
 
 ### CategoriaBLL.cs (Lógica)
 
@@ -180,7 +188,7 @@ private void btnGuardar_Click(object sender, EventArgs e)
 
 | Capa | Responsabilidad | Ejemplo |
 |------|-----------------|---------|
-| **Presentación + Estilos** | Cómo se ve | "El botón es verde, 36px, emoji 💾" |
+| **Presentación + Estilos** | Cómo se ve | "El botón es gris oscuro, 36px, emoji 💾" |
 | **Negocio** | Qué se valida | "El nombre no puede estar vacío" |
 | **Datos** | Cómo se persiste | "INSERT INTO Categoria (Nombre, ...)" |
 | **Entidades** | Estructura | "Categoria tiene IdCategoria, Nombre, ..." |
@@ -189,14 +197,14 @@ private void btnGuardar_Click(object sender, EventArgs e)
 
 ## Ventaja: Puedes Cambiar Estilos sin Tocar Lógica
 
-### Escenario: "Cambiar verde a azul en btnGuardar"
+### Escenario: "Cambiar el tono de gris de btnGuardar"
 
 **Opción 1: Sin TemaModerno (Lo viejo)**
 ```csharp
 // Tendrías que buscar en TODOS los Frm*.cs:
-btnGuardar.BackColor = Color.Blue;  // ← En FrmCategoria.cs
-btnGuardar.BackColor = Color.Blue;  // ← En FrmPlato.cs
-btnGuardar.BackColor = Color.Blue;  // ← En FrmEmpleado.cs
+btnGuardar.BackColor = Color.FromArgb(90, 90, 90);  // ← En FrmCategoria.cs
+btnGuardar.BackColor = Color.FromArgb(90, 90, 90);  // ← En FrmPlato.cs
+btnGuardar.BackColor = Color.FromArgb(90, 90, 90);  // ← En FrmEmpleado.cs
 // ... 20 veces más en otros formularios
 // PROBLEMA: Error propenso, cambios inconsistentes
 ```
@@ -206,11 +214,13 @@ btnGuardar.BackColor = Color.Blue;  // ← En FrmEmpleado.cs
 // Editas TemaModerno.cs una sola vez:
 public static void EstilizarBotonSuccess(Button btn)
 {
-    btn.BackColor = Colores.Exito;  // Cambias Colores.Exito = Color.Blue
+    btn.BackColor = Colores.Exito;  // Cambias Colores.Exito = Color.FromArgb(90, 90, 90)
 }
 
-// ¡Todos los btnGuardar en TODA la app cambian a azul automáticamente!
+// ¡Todos los btnGuardar en TODA la app cambian de tono automáticamente!
 ```
+
+> [!tip] Justamente así se migró toda la app de la paleta vieja (azul/verde/rojo) a la actual **escala de grises**: bastó editar la clase `Colores` en `TemaModerno.cs`, sin tocar ningún `Frm*.cs` ni las capas de Negocio/Datos/Entidades.
 
 ---
 
@@ -264,13 +274,13 @@ public partial class FrmCategoria : Form
     private void FrmCategoria_Load(object sender, EventArgs e)
     {
         // PASO 3a: Aplicar estilos
-        TemaModerno.EstilizarFormulario(this);              // Fondo #F5F5F5
-        TemaModerno.EstilizarTextBox(txtNombre);            // Blanco, borde fino
-        TemaModerno.EstilizarBotonSuccess(btnGuardar);      // Verde, 36px
-        TemaModerno.EstilizarBotonDanger(btnEliminar);      // Rojo, 36px
+        TemaModerno.EstilizarFormulario(this);              // Fondo RGB(250,250,250)
+        TemaModerno.EstilizarTextBox(txtNombre);            // Blanco, borde fino gris
+        TemaModerno.EstilizarBotonSuccess(btnGuardar);      // Gris oscuro, 36px
+        TemaModerno.EstilizarBotonDanger(btnEliminar);      // Gris medio, 36px
         btnGuardar.Text = IconosUI.Guardar;                 // 💾 Guardar
         btnEliminar.Text = IconosUI.Eliminar;               // 🗑️ Eliminar
-        TemaModerno.EstilizarDataGridView(dgvLista);        // Encabezados azules
+        TemaModerno.EstilizarDataGridView(dgvLista);        // Encabezados gris oscuro/texto blanco
         
         // PASO 3b: Cargar datos de Negocio
         DataTable dt = _bll.ListarTabla();  // Llama BLL → DAO → BD
@@ -315,9 +325,10 @@ public partial class FrmCategoria : Form
 
 ## Checklist de Integración
 
-✅ **TemaModerno.cs creado** — Define colores, métodos de estilo  
+✅ **TemaModerno.cs creado** — Define la paleta gris, métodos de estilo, imágenes referenciales y barra de título MDI  
 ✅ **IconosUI.cs creado** — Define constantes de emojis  
-✅ **Frm*.cs actualizados** — Todos usan TemaModerno + IconosUI en Load()  
+✅ **Recursos/Imagenes/*.png** — Tarjetas referenciales por ventana + fondo del MDI  
+✅ **Frm*.cs actualizados** — Todos usan TemaModerno + IconosUI en Load() (y al final: `UniformarEntradas`, `AgregarTarjetaReferencia`, `AplicarBarraTitulo`)  
 ✅ **No se toca BLL** — Lógica sigue igual  
 ✅ **No se toca DAO** — Datos siguen igual  
 ✅ **No se toca Entidades** — Modelos siguen igual  

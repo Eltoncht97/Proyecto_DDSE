@@ -27,6 +27,53 @@ BEGIN
 END
 ```
 
+## SPs de edición de pedido (UPDATE / DELETE / SELECT por id)
+Para poder **editar** un pedido ya guardado (cargar un pedido existente y guardarlo de nuevo),
+se agregaron 3 SPs nuevos en `database/01_RestaurantDB.sql`. Sirven como ejemplo de los otros
+tres "sabores" de SP además del Insertar/Listar de arriba:
+
+```sql
+-- 1) SELECT por id: trae la CABECERA con los Id crudos (IdMesa, IdEmpleado, IdCliente)
+--    para poder reseleccionar los combos en el formulario al cargar.
+CREATE PROCEDURE dbo.usp_Pedido_ObtenerPorId
+    @IdPedido INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT IdPedido, Fecha, IdMesa, IdEmpleado, IdCliente, Situacion, Total
+    FROM dbo.Pedido
+    WHERE IdPedido = @IdPedido;
+END
+GO
+-- 2) UPDATE: actualiza la cabecera. OJO: NO toca la Situacion (se preserva la que ya tenía).
+CREATE PROCEDURE dbo.usp_Pedido_Actualizar
+    @IdPedido INT, @IdMesa INT, @IdEmpleado INT, @IdCliente INT, @Total DECIMAL(10,2)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    UPDATE dbo.Pedido
+       SET IdMesa = @IdMesa, IdEmpleado = @IdEmpleado, IdCliente = @IdCliente, Total = @Total
+     WHERE IdPedido = @IdPedido;
+END
+GO
+-- 3) DELETE real (no es baja lógica): borra TODO el detalle del pedido.
+--    La estrategia al editar es "borrar y reinsertar" las líneas (ver nota abajo).
+CREATE PROCEDURE dbo.usp_DetallePedido_EliminarPorPedido
+    @IdPedido INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    DELETE FROM dbo.DetallePedido WHERE IdPedido = @IdPedido;
+END
+```
+
+> [!tip] Patrón "borrar y reinsertar el detalle"
+> Al **actualizar** un pedido, el [[Capa de Datos (DAO)|DAO]] abre una
+> [[Transacción (Commit y Rollback)|transacción]] y ejecuta en orden:
+> `usp_Pedido_Actualizar` (cabecera) → `usp_DetallePedido_EliminarPorPedido` (borra el detalle viejo)
+> → `usp_DetallePedido_Insertar` por cada línea nueva. Si algo falla, la transacción hace `ROLLBACK`
+> y no queda un pedido a medias.
+
 ## ¿Por qué usarlos? (Tema 3)
 1. 🔒 **Seguridad**: usan [[Parámetros e inyección SQL|parámetros]] → evitan inyección SQL.
 2. ⚡ **Rendimiento**: están precompilados.

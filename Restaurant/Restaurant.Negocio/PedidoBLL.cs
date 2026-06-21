@@ -52,5 +52,38 @@ namespace Restaurant.Negocio
                 throw new ApplicationException("Seleccione un pedido válido.");
             _dao.CambiarSituacion(idPedido, situacion);
         }
+
+        // Carga un pedido completo (cabecera + detalle) para editarlo.
+        public Pedido ObtenerPorId(int idPedido)
+        {
+            if (idPedido <= 0)
+                throw new ApplicationException("Seleccione un pedido válido.");
+
+            Pedido pedido = _dao.ObtenerPorId(idPedido);
+            if (pedido == null)
+                throw new ApplicationException("No se encontró el pedido N° " + idPedido + ".");
+
+            pedido.Detalles = _dao.ObtenerDetalle(idPedido);
+            return pedido;
+        }
+
+        public void ActualizarPedido(Pedido pedido)
+        {
+            if (pedido == null)
+                throw new ApplicationException("No hay datos del pedido.");
+            if (pedido.IdPedido <= 0)
+                throw new ApplicationException("Pedido no válido para actualizar.");
+            if (pedido.IdMesa <= 0)
+                throw new ApplicationException("Debe seleccionar una mesa.");
+            if (pedido.IdEmpleado <= 0)
+                throw new ApplicationException("Debe seleccionar el mozo que atiende.");
+            if (pedido.Detalles == null || pedido.Detalles.Count == 0)
+                throw new ApplicationException("Debe agregar al menos un plato al pedido.");
+
+            // Tema 5 - LINQ: recalcula el total a partir del detalle editado.
+            pedido.Total = pedido.Detalles.Sum(d => d.Subtotal);
+
+            _dao.Actualizar(pedido);
+        }
     }
 }

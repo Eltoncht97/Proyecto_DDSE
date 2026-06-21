@@ -418,6 +418,34 @@ BEGIN
     UPDATE dbo.Pedido SET Situacion = @Situacion WHERE IdPedido = @IdPedido;
 END
 GO
+CREATE PROCEDURE dbo.usp_Pedido_ObtenerPorId
+    @IdPedido INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT IdPedido, Fecha, IdMesa, IdEmpleado, IdCliente, Situacion, Total
+    FROM dbo.Pedido
+    WHERE IdPedido = @IdPedido;
+END
+GO
+CREATE PROCEDURE dbo.usp_Pedido_Actualizar
+    @IdPedido INT, @IdMesa INT, @IdEmpleado INT, @IdCliente INT, @Total DECIMAL(10,2)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    UPDATE dbo.Pedido
+       SET IdMesa = @IdMesa, IdEmpleado = @IdEmpleado, IdCliente = @IdCliente, Total = @Total
+     WHERE IdPedido = @IdPedido;
+END
+GO
+CREATE PROCEDURE dbo.usp_DetallePedido_EliminarPorPedido
+    @IdPedido INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    DELETE FROM dbo.DetallePedido WHERE IdPedido = @IdPedido;
+END
+GO
 
 /* ---------- COMPROBANTE / FACTURACION ---------- */
 GO

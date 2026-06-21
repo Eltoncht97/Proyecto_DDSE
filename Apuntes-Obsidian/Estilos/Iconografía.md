@@ -28,6 +28,7 @@ namespace Restaurant.Presentacion.Iconos
         public const string Quitar = "➖ Quitar";
         public const string Buscar = "🔍 Buscar";
         public const string Refrescar = "🔄 Refrescar";
+        public const string Aceptar = "✓ Aceptar";
         
         // Operaciones especiales
         public const string Facturar = "📄 Facturar";
@@ -117,13 +118,13 @@ Ambas trabajan juntas:
 
 // 1. TemaModerno define CÓMO se ve
 TemaModerno.EstilizarBotonSuccess(btnGuardar);
-// Resultado: BackColor = Verde, ForeColor = Blanco, Height = 36px
+// Resultado: BackColor = gris oscuro (70,70,70), ForeColor = Blanco, Height = 36px
 
 // 2. IconosUI define QUÉ dice
 btnGuardar.Text = IconosUI.Guardar;
 // Resultado: Botón con texto "💾 Guardar"
 
-// Efecto visual final: Botón verde grande con icono 💾
+// Efecto visual final: Botón gris oscuro grande con icono 💾
 ```
 
 ---
@@ -190,6 +191,7 @@ El emoji aparece en el botón de inmediato.
 | ➖ | Quitar | Quitar línea |
 | 🔍 | Buscar | Buscar, Filtrar |
 | 🔄 | Refrescar | Recargar, Actualizar |
+| ✓ | Aceptar | Confirmar, Aceptar |
 | 📄 | Documento | Facturación, Comprobante |
 | 📋 | Listin | Reporte, Generar |
 | 📊 | Gráfico | Reportes, Estadísticas |

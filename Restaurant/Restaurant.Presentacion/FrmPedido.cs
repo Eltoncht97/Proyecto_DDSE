@@ -18,6 +18,7 @@ namespace Restaurant.Presentacion
         private readonly PlatoBLL _platoBll = new PlatoBLL();
 
         private BindingList<DetallePedido> _detalle = new BindingList<DetallePedido>();
+        private int _idPedido = 0;   // 0 = pedido nuevo, > 0 = editando un pedido existente
 
         public FrmPedido()
         {
@@ -66,6 +67,10 @@ namespace Restaurant.Presentacion
             TemaModerno.EstilizarDataGridView(dgvDetalle);
             TemaModerno.EstilizarTotal(lblTotal);
             ActualizarTotal();
+            TemaModerno.EstilizarComboBox(cboBuscarPedido);
+            TemaModerno.EstilizarBotonSecundario(btnCargar);
+            btnCargar.Height = 27;
+            CargarPedidos();
             TemaModerno.AgregarTarjetaReferencia(this, "pedido.png");
             TemaModerno.AplicarBarraTitulo(this);
         }
@@ -147,6 +152,7 @@ namespace Restaurant.Presentacion
             {
                 Pedido pedido = new Pedido
                 {
+                    IdPedido = _idPedido,
                     Fecha = DateTime.Now,
                     IdMesa = cboMesa.SelectedValue == null ? 0 : Convert.ToInt32(cboMesa.SelectedValue),
                     IdEmpleado = cboMozo.SelectedValue == null ? 0 : Convert.ToInt32(cboMozo.SelectedValue),
@@ -155,10 +161,21 @@ namespace Restaurant.Presentacion
                     Detalles = _detalle.ToList()
                 };
 
-                int idPedido = _pedidoBll.RegistrarPedido(pedido);
-                MessageBox.Show("Pedido registrado correctamente. N° " + idPedido, "Información",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (_idPedido == 0)
+                {
+                    int idPedido = _pedidoBll.RegistrarPedido(pedido);
+                    MessageBox.Show("Pedido registrado correctamente. N° " + idPedido, "Información",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    _pedidoBll.ActualizarPedido(pedido);
+                    MessageBox.Show("Pedido N° " + _idPedido + " actualizado correctamente.", "Información",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
                 Limpiar();
+                CargarPedidos();
             }
             catch (Exception ex)
             {
@@ -171,8 +188,60 @@ namespace Restaurant.Presentacion
             Limpiar();
         }
 
+        // Llena el combo con los pedidos editables (no muestra los ya pagados ni anulados).
+        private void CargarPedidos()
+        {
+            cboBuscarPedido.DataSource = _pedidoBll.Listar()
+                .Where(p => p.Situacion != "Pagado" && p.Situacion != "Anulado")
+                .ToList();
+            cboBuscarPedido.DisplayMember = "Resumen";
+            cboBuscarPedido.ValueMember = "IdPedido";
+            cboBuscarPedido.SelectedIndex = -1;
+        }
+
+        private void btnCargar_Click(object sender, EventArgs e)
+        {
+            if (cboBuscarPedido.SelectedIndex < 0 || cboBuscarPedido.SelectedValue == null)
+            {
+                MessageBox.Show("Seleccione un pedido de la lista.", "Validación",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            CargarPedido(Convert.ToInt32(cboBuscarPedido.SelectedValue));
+        }
+
+        // Carga un pedido existente en el formulario para editarlo.
+        private void CargarPedido(int idPedido)
+        {
+            try
+            {
+                Pedido p = _pedidoBll.ObtenerPorId(idPedido);
+                _idPedido = p.IdPedido;
+
+                cboMesa.SelectedValue = p.IdMesa;
+                cboMozo.SelectedValue = p.IdEmpleado;
+                if (p.IdCliente.HasValue)
+                    cboCliente.SelectedValue = p.IdCliente.Value;
+                else
+                    cboCliente.SelectedIndex = -1;
+
+                _detalle = new BindingList<DetallePedido>(p.Detalles);
+                dgvDetalle.DataSource = _detalle;
+                FormatearDetalle();
+                ActualizarTotal();
+
+                lblTitulo.Text = "Editar Pedido N° " + _idPedido;
+                btnRegistrar.Text = "💾 Actualizar";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
         private void Limpiar()
         {
+            _idPedido = 0;
             _detalle = new BindingList<DetallePedido>();
             dgvDetalle.DataSource = _detalle;
             FormatearDetalle();
@@ -182,6 +251,9 @@ namespace Restaurant.Presentacion
             cboPlato.SelectedIndex = -1;
             nudCantidad.Value = 1;
             ActualizarTotal();
+            lblTitulo.Text = "Registro de Pedido";
+            btnRegistrar.Text = IconosUI.Guardar;
+            if (cboBuscarPedido != null) cboBuscarPedido.SelectedIndex = -1;
         }
     }
 }

@@ -131,5 +131,78 @@ namespace Restaurant.Datos
                 cmd.ExecuteNonQuery();
             }
         }
+
+        public Pedido ObtenerPorId(int idPedido)
+        {
+            Pedido pedido = null;
+            using (SqlConnection cn = Conexion.Obtener())
+            {
+                SqlCommand cmd = new SqlCommand("usp_Pedido_ObtenerPorId", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@IdPedido", idPedido);
+                cn.Open();
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    if (dr.Read())
+                    {
+                        pedido = new Pedido
+                        {
+                            IdPedido = Convert.ToInt32(dr["IdPedido"]),
+                            Fecha = Convert.ToDateTime(dr["Fecha"]),
+                            IdMesa = Convert.ToInt32(dr["IdMesa"]),
+                            IdEmpleado = Convert.ToInt32(dr["IdEmpleado"]),
+                            IdCliente = dr["IdCliente"] == DBNull.Value ? (int?)null : Convert.ToInt32(dr["IdCliente"]),
+                            Situacion = dr["Situacion"].ToString(),
+                            Total = Convert.ToDecimal(dr["Total"])
+                        };
+                    }
+                }
+            }
+            return pedido;
+        }
+
+        // Actualiza la cabecera y reemplaza por completo el detalle (transacción).
+        public void Actualizar(Pedido pedido)
+        {
+            using (SqlConnection cn = Conexion.Obtener())
+            {
+                cn.Open();
+                SqlTransaction tran = cn.BeginTransaction();
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("usp_Pedido_Actualizar", cn, tran);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@IdPedido", pedido.IdPedido);
+                    cmd.Parameters.AddWithValue("@IdMesa", pedido.IdMesa);
+                    cmd.Parameters.AddWithValue("@IdEmpleado", pedido.IdEmpleado);
+                    cmd.Parameters.AddWithValue("@IdCliente", (object)pedido.IdCliente ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Total", pedido.Total);
+                    cmd.ExecuteNonQuery();
+
+                    SqlCommand cmdDel = new SqlCommand("usp_DetallePedido_EliminarPorPedido", cn, tran);
+                    cmdDel.CommandType = CommandType.StoredProcedure;
+                    cmdDel.Parameters.AddWithValue("@IdPedido", pedido.IdPedido);
+                    cmdDel.ExecuteNonQuery();
+
+                    foreach (DetallePedido det in pedido.Detalles)
+                    {
+                        SqlCommand cmdDet = new SqlCommand("usp_DetallePedido_Insertar", cn, tran);
+                        cmdDet.CommandType = CommandType.StoredProcedure;
+                        cmdDet.Parameters.AddWithValue("@IdPedido", pedido.IdPedido);
+                        cmdDet.Parameters.AddWithValue("@IdPlato", det.IdPlato);
+                        cmdDet.Parameters.AddWithValue("@Cantidad", det.Cantidad);
+                        cmdDet.Parameters.AddWithValue("@PrecioUnitario", det.PrecioUnitario);
+                        cmdDet.ExecuteNonQuery();
+                    }
+
+                    tran.Commit();
+                }
+                catch (Exception)
+                {
+                    tran.Rollback();
+                    throw;
+                }
+            }
+        }
     }
 }

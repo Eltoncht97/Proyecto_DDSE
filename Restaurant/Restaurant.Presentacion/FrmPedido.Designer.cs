@@ -34,6 +34,9 @@ namespace Restaurant.Presentacion
             this.lblTotal = new System.Windows.Forms.Label();
             this.btnRegistrar = new System.Windows.Forms.Button();
             this.btnNuevo = new System.Windows.Forms.Button();
+            this.lblBuscar = new System.Windows.Forms.Label();
+            this.cboBuscarPedido = new System.Windows.Forms.ComboBox();
+            this.btnCargar = new System.Windows.Forms.Button();
             this.gbDetalle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudCantidad)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalle)).BeginInit();
@@ -49,6 +52,33 @@ namespace Restaurant.Presentacion
             this.lblTitulo.Size = new System.Drawing.Size(196, 25);
             this.lblTitulo.TabIndex = 0;
             this.lblTitulo.Text = "Registro de Pedido";
+            //
+            // lblBuscar
+            //
+            this.lblBuscar.AutoSize = true;
+            this.lblBuscar.Location = new System.Drawing.Point(300, 17);
+            this.lblBuscar.Name = "lblBuscar";
+            this.lblBuscar.Size = new System.Drawing.Size(86, 15);
+            this.lblBuscar.TabIndex = 14;
+            this.lblBuscar.Text = "Cargar pedido:";
+            //
+            // cboBuscarPedido
+            //
+            this.cboBuscarPedido.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboBuscarPedido.Location = new System.Drawing.Point(392, 13);
+            this.cboBuscarPedido.Name = "cboBuscarPedido";
+            this.cboBuscarPedido.Size = new System.Drawing.Size(258, 23);
+            this.cboBuscarPedido.TabIndex = 15;
+            //
+            // btnCargar
+            //
+            this.btnCargar.Location = new System.Drawing.Point(658, 11);
+            this.btnCargar.Name = "btnCargar";
+            this.btnCargar.Size = new System.Drawing.Size(82, 27);
+            this.btnCargar.TabIndex = 16;
+            this.btnCargar.Text = "Cargar";
+            this.btnCargar.UseVisualStyleBackColor = true;
+            this.btnCargar.Click += new System.EventHandler(this.btnCargar_Click);
             //
             // lblMesa
             //
@@ -248,6 +278,9 @@ namespace Restaurant.Presentacion
             this.Controls.Add(this.cboMesa);
             this.Controls.Add(this.lblMesa);
             this.Controls.Add(this.lblTitulo);
+            this.Controls.Add(this.lblBuscar);
+            this.Controls.Add(this.cboBuscarPedido);
+            this.Controls.Add(this.btnCargar);
             this.Name = "FrmPedido";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Registro de Pedido";
@@ -279,5 +312,8 @@ namespace Restaurant.Presentacion
         private System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.Button btnRegistrar;
         private System.Windows.Forms.Button btnNuevo;
+        private System.Windows.Forms.Label lblBuscar;
+        private System.Windows.Forms.ComboBox cboBuscarPedido;
+        private System.Windows.Forms.Button btnCargar;
     }
 }
