@@ -81,6 +81,7 @@ namespace Restaurant.Presentacion
             if (dgvDetalle.Columns.Contains("IdDetalle")) dgvDetalle.Columns["IdDetalle"].Visible = false;
             if (dgvDetalle.Columns.Contains("IdPedido")) dgvDetalle.Columns["IdPedido"].Visible = false;
             if (dgvDetalle.Columns.Contains("IdPlato")) dgvDetalle.Columns["IdPlato"].Visible = false;
+            if (dgvDetalle.Columns.Contains("EstadoDetalle")) dgvDetalle.Columns["EstadoDetalle"].Visible = false;
             dgvDetalle.Columns["Plato"].HeaderText = "Plato";
             dgvDetalle.Columns["Cantidad"].HeaderText = "Cant.";
             dgvDetalle.Columns["PrecioUnitario"].HeaderText = "P. Unit.";
@@ -188,7 +189,7 @@ namespace Restaurant.Presentacion
             Limpiar();
         }
 
-        // Llena el combo con los pedidos editables (no muestra los ya pagados ni anulados).
+        
         private void CargarPedidos()
         {
             cboBuscarPedido.DataSource = _pedidoBll.Listar()

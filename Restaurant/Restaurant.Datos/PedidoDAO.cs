@@ -111,12 +111,40 @@ namespace Restaurant.Datos
                             IdPlato = Convert.ToInt32(dr["IdPlato"]),
                             Plato = dr["Plato"].ToString(),
                             Cantidad = Convert.ToInt32(dr["Cantidad"]),
-                            PrecioUnitario = Convert.ToDecimal(dr["PrecioUnitario"])
+                            PrecioUnitario = Convert.ToDecimal(dr["PrecioUnitario"]),
+                            EstadoDetalle = dr["EstadoDetalle"] == DBNull.Value
+                                ? "Solicitado" : dr["EstadoDetalle"].ToString()
                         });
                     }
                 }
             }
             return lista;
+        }
+
+        public DataTable ListarEnPreparacion()
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection cn = Conexion.Obtener())
+            {
+                SqlCommand cmd = new SqlCommand("usp_Pedido_ListarEnPreparacion", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+            }
+            return dt;
+        }
+
+        public void CambiarEstadoDetalle(int idDetalle, string estado)
+        {
+            using (SqlConnection cn = Conexion.Obtener())
+            {
+                SqlCommand cmd = new SqlCommand("usp_DetallePedido_CambiarEstado", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@IdDetalle", idDetalle);
+                cmd.Parameters.AddWithValue("@Estado", estado);
+                cn.Open();
+                cmd.ExecuteNonQuery();
+            }
         }
 
         public void CambiarSituacion(int idPedido, string situacion)

@@ -111,6 +111,7 @@ CREATE TABLE dbo.DetallePedido
     IdPlato        INT               NOT NULL,
     Cantidad       INT               NOT NULL CONSTRAINT DF_Detalle_Cantidad DEFAULT(1),
     PrecioUnitario DECIMAL(10,2)     NOT NULL,
+    EstadoDetalle  NVARCHAR(20)      NOT NULL CONSTRAINT DF_Detalle_Estado DEFAULT('Solicitado'), -- Solicitado / Servido
     Subtotal       AS (Cantidad * PrecioUnitario) PERSISTED,
     CONSTRAINT PK_DetallePedido PRIMARY KEY (IdDetalle),
     CONSTRAINT FK_Detalle_Pedido FOREIGN KEY (IdPedido) REFERENCES dbo.Pedido(IdPedido),
@@ -404,7 +405,7 @@ AS
 BEGIN
     SET NOCOUNT ON;
     SELECT d.IdDetalle, d.IdPedido, d.IdPlato, p.Nombre AS Plato,
-           d.Cantidad, d.PrecioUnitario, d.Subtotal
+           d.Cantidad, d.PrecioUnitario, d.Subtotal, d.EstadoDetalle
     FROM dbo.DetallePedido d
     INNER JOIN dbo.Plato p ON p.IdPlato = d.IdPlato
     WHERE d.IdPedido = @IdPedido;
@@ -447,6 +448,37 @@ BEGIN
 END
 GO
 
+/* ---------- COCINA (estado de cada línea del pedido) ---------- */
+GO
+CREATE PROCEDURE dbo.usp_DetallePedido_CambiarEstado
+    @IdDetalle INT, @Estado NVARCHAR(20)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    UPDATE dbo.DetallePedido SET EstadoDetalle = @Estado WHERE IdDetalle = @IdDetalle;
+END
+GO
+CREATE PROCEDURE dbo.usp_Pedido_ListarEnPreparacion
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT pe.IdPedido, pe.Fecha, m.Numero AS Mesa,
+           (e.Nombres + ' ' + e.Apellidos) AS Mozo,
+           ISNULL(c.Nombres, 'Varios') AS Cliente,
+           pe.Situacion,
+           SUM(CASE WHEN d.EstadoDetalle = 'Solicitado' THEN 1 ELSE 0 END) AS Pendientes,
+           COUNT(d.IdDetalle) AS Items
+    FROM dbo.Pedido pe
+    INNER JOIN dbo.Mesa m         ON m.IdMesa = pe.IdMesa
+    INNER JOIN dbo.Empleado e     ON e.IdEmpleado = pe.IdEmpleado
+    LEFT  JOIN dbo.Cliente c      ON c.IdCliente = pe.IdCliente
+    INNER JOIN dbo.DetallePedido d ON d.IdPedido = pe.IdPedido
+    WHERE pe.Situacion NOT IN ('Pagado', 'Anulado')
+    GROUP BY pe.IdPedido, pe.Fecha, m.Numero, e.Nombres, e.Apellidos, c.Nombres, pe.Situacion
+    ORDER BY pe.Fecha;
+END
+GO
+
 /* ---------- COMPROBANTE / FACTURACION ---------- */
 GO
 CREATE PROCEDURE dbo.usp_Comprobante_Insertar
@@ -480,6 +512,49 @@ BEGIN
 END
 GO
 
+/* ---------- USUARIOS (mantenimiento) ---------- */
+GO
+CREATE PROCEDURE dbo.usp_Usuario_Listar
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT IdUsuario, NombreUsuario, Clave, NombreCompleto, Rol, Estado
+    FROM dbo.Usuario
+    ORDER BY NombreUsuario;
+END
+GO
+CREATE PROCEDURE dbo.usp_Usuario_Insertar
+    @NombreUsuario NVARCHAR(40), @Clave NVARCHAR(40),
+    @NombreCompleto NVARCHAR(80), @Rol NVARCHAR(20), @Estado BIT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    INSERT INTO dbo.Usuario (NombreUsuario, Clave, NombreCompleto, Rol, Estado)
+    VALUES (@NombreUsuario, @Clave, @NombreCompleto, @Rol, @Estado);
+    SELECT CAST(SCOPE_IDENTITY() AS INT);
+END
+GO
+CREATE PROCEDURE dbo.usp_Usuario_Actualizar
+    @IdUsuario INT, @NombreUsuario NVARCHAR(40), @Clave NVARCHAR(40),
+    @NombreCompleto NVARCHAR(80), @Rol NVARCHAR(20), @Estado BIT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    UPDATE dbo.Usuario
+       SET NombreUsuario = @NombreUsuario, Clave = @Clave,
+           NombreCompleto = @NombreCompleto, Rol = @Rol, Estado = @Estado
+     WHERE IdUsuario = @IdUsuario;
+END
+GO
+CREATE PROCEDURE dbo.usp_Usuario_Eliminar
+    @IdUsuario INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    UPDATE dbo.Usuario SET Estado = 0 WHERE IdUsuario = @IdUsuario;
+END
+GO
+
 /* ---------- REPORTE DE VENTAS  (Tema 6: origen de datos del ReportViewer) ---------- */
 GO
 CREATE PROCEDURE dbo.usp_Reporte_VentasPorFecha
@@ -504,12 +579,78 @@ BEGIN
 END
 GO
 
+/* ---------- REPORTE: PLATOS MÁS VENDIDOS ---------- */
+GO
+CREATE PROCEDURE dbo.usp_Reporte_PlatosMasVendidos
+    @FechaInicio DATE, @FechaFin DATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT  p.Nombre AS Plato,
+            cat.Nombre AS Categoria,
+            SUM(dp.Cantidad) AS TotalVendido,
+            p.Precio AS PrecioUnit,
+            SUM(dp.Subtotal) AS TotalIngreso
+    FROM dbo.DetallePedido dp
+    INNER JOIN dbo.Plato p       ON p.IdPlato = dp.IdPlato
+    INNER JOIN dbo.Categoria cat ON cat.IdCategoria = p.IdCategoria
+    INNER JOIN dbo.Pedido pe     ON pe.IdPedido = dp.IdPedido
+    WHERE CAST(pe.Fecha AS DATE) BETWEEN @FechaInicio AND @FechaFin
+      AND pe.Situacion <> 'Anulado'
+    GROUP BY p.Nombre, cat.Nombre, p.Precio
+    ORDER BY TotalVendido DESC;
+END
+GO
+
+/* ---------- REPORTE: VENTAS POR EMPLEADO ---------- */
+GO
+CREATE PROCEDURE dbo.usp_Reporte_VentasPorEmpleado
+    @FechaInicio DATE, @FechaFin DATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT  (e.Nombres + ' ' + e.Apellidos) AS Empleado,
+            e.Cargo,
+            COUNT(DISTINCT pe.IdPedido) AS TotalPedidos,
+            SUM(c.Total) AS TotalVentas
+    FROM dbo.Comprobante c
+    INNER JOIN dbo.Pedido pe  ON pe.IdPedido = c.IdPedido
+    INNER JOIN dbo.Empleado e ON e.IdEmpleado = pe.IdEmpleado
+    WHERE CAST(c.Fecha AS DATE) BETWEEN @FechaInicio AND @FechaFin
+    GROUP BY e.Nombres, e.Apellidos, e.Cargo
+    ORDER BY TotalVentas DESC;
+END
+GO
+
+/* ---------- REPORTE: CLIENTES ---------- */
+GO
+CREATE PROCEDURE dbo.usp_Reporte_Clientes
+    @FechaInicio DATE, @FechaFin DATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT  (cl.Nombres + ' ' + cl.Apellidos) AS Cliente,
+            cl.Documento,
+            COUNT(DISTINCT pe.IdPedido) AS TotalVisitas,
+            SUM(c.Total) AS TotalGastado,
+            MAX(c.Fecha) AS UltimaVisita
+    FROM dbo.Cliente cl
+    INNER JOIN dbo.Pedido pe     ON pe.IdCliente = cl.IdCliente
+    INNER JOIN dbo.Comprobante c ON c.IdPedido = pe.IdPedido
+    WHERE CAST(c.Fecha AS DATE) BETWEEN @FechaInicio AND @FechaFin
+    GROUP BY cl.Nombres, cl.Apellidos, cl.Documento
+    ORDER BY TotalGastado DESC;
+END
+GO
+
 /* ============================================================================
    4. DATOS DE PRUEBA
    ============================================================================ */
 INSERT INTO dbo.Usuario (NombreUsuario, Clave, NombreCompleto, Rol, Estado) VALUES
 ('admin', 'admin123', 'Administrador del Sistema', 'Administrador', 1),
-('cajero', 'cajero123', 'Carlos Cajero', 'Cajero', 1);
+('cajero', 'cajero123', 'Carlos Cajero', 'Cajero', 1),
+('mozo', 'mozo123', 'Manuel Mozo Flores', 'Mozo', 1),
+('cocinero', 'cocina123', 'Luis Ramírez Díaz', 'Cocinero', 1);
 
 INSERT INTO dbo.Categoria (Nombre, Descripcion, Estado) VALUES
 ('Entradas',        'Platos de entrada y piqueos', 1),

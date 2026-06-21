@@ -53,6 +53,20 @@ namespace Restaurant.Negocio
             _dao.CambiarSituacion(idPedido, situacion);
         }
 
+        public DataTable ListarEnPreparacion()
+        {
+            return _dao.ListarEnPreparacion();
+        }
+
+        public void CambiarEstadoDetalle(int idDetalle, string estado)
+        {
+            if (idDetalle <= 0)
+                throw new ApplicationException("Seleccione una línea válida del pedido.");
+            if (estado != "Solicitado" && estado != "Servido")
+                throw new ApplicationException("Estado de línea no válido.");
+            _dao.CambiarEstadoDetalle(idDetalle, estado);
+        }
+
         // Carga un pedido completo (cabecera + detalle) para editarlo.
         public Pedido ObtenerPorId(int idPedido)
         {

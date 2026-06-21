@@ -22,11 +22,17 @@ namespace Restaurant.Presentacion
             this.mnuMesas = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuEmpleados = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuClientes = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuUsuarios = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuOperaciones = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuNuevoPedido = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFacturacion = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuReportes = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuReporteVentas = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuPlatosVendidos = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuVentasEmpleado = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuReporteClientes = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuCocina = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuPedidosCocina = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSalir = new System.Windows.Forms.ToolStripMenuItem();
             this.statusBar = new System.Windows.Forms.StatusStrip();
             this.lblUsuario = new System.Windows.Forms.ToolStripStatusLabel();
@@ -41,6 +47,7 @@ namespace Restaurant.Presentacion
             this.mnuMantenimientos,
             this.mnuOperaciones,
             this.mnuReportes,
+            this.mnuCocina,
             this.mnuSalir});
             this.menuPrincipal.Location = new System.Drawing.Point(0, 0);
             this.menuPrincipal.Name = "menuPrincipal";
@@ -55,7 +62,8 @@ namespace Restaurant.Presentacion
             this.mnuPlatos,
             this.mnuMesas,
             this.mnuEmpleados,
-            this.mnuClientes});
+            this.mnuClientes,
+            this.mnuUsuarios});
             this.mnuMantenimientos.Name = "mnuMantenimientos";
             this.mnuMantenimientos.Size = new System.Drawing.Size(112, 20);
             this.mnuMantenimientos.Text = "&Mantenimientos";
@@ -95,6 +103,13 @@ namespace Restaurant.Presentacion
             this.mnuClientes.Text = "Clientes";
             this.mnuClientes.Click += new System.EventHandler(this.mnuClientes_Click);
             //
+            // mnuUsuarios
+            //
+            this.mnuUsuarios.Name = "mnuUsuarios";
+            this.mnuUsuarios.Size = new System.Drawing.Size(180, 22);
+            this.mnuUsuarios.Text = "Usuarios";
+            this.mnuUsuarios.Click += new System.EventHandler(this.mnuUsuarios_Click);
+            //
             // mnuOperaciones
             //
             this.mnuOperaciones.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -121,7 +136,10 @@ namespace Restaurant.Presentacion
             // mnuReportes
             //
             this.mnuReportes.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuReporteVentas});
+            this.mnuReporteVentas,
+            this.mnuPlatosVendidos,
+            this.mnuVentasEmpleado,
+            this.mnuReporteClientes});
             this.mnuReportes.Name = "mnuReportes";
             this.mnuReportes.Size = new System.Drawing.Size(66, 20);
             this.mnuReportes.Text = "&Reportes";
@@ -129,9 +147,45 @@ namespace Restaurant.Presentacion
             // mnuReporteVentas
             //
             this.mnuReporteVentas.Name = "mnuReporteVentas";
-            this.mnuReporteVentas.Size = new System.Drawing.Size(180, 22);
+            this.mnuReporteVentas.Size = new System.Drawing.Size(200, 22);
             this.mnuReporteVentas.Text = "Reporte de Ventas";
             this.mnuReporteVentas.Click += new System.EventHandler(this.mnuReporteVentas_Click);
+            //
+            // mnuPlatosVendidos
+            //
+            this.mnuPlatosVendidos.Name = "mnuPlatosVendidos";
+            this.mnuPlatosVendidos.Size = new System.Drawing.Size(200, 22);
+            this.mnuPlatosVendidos.Text = "Platos más vendidos";
+            this.mnuPlatosVendidos.Click += new System.EventHandler(this.mnuPlatosVendidos_Click);
+            //
+            // mnuVentasEmpleado
+            //
+            this.mnuVentasEmpleado.Name = "mnuVentasEmpleado";
+            this.mnuVentasEmpleado.Size = new System.Drawing.Size(200, 22);
+            this.mnuVentasEmpleado.Text = "Ventas por Empleado";
+            this.mnuVentasEmpleado.Click += new System.EventHandler(this.mnuVentasEmpleado_Click);
+            //
+            // mnuReporteClientes
+            //
+            this.mnuReporteClientes.Name = "mnuReporteClientes";
+            this.mnuReporteClientes.Size = new System.Drawing.Size(200, 22);
+            this.mnuReporteClientes.Text = "Reporte de Clientes";
+            this.mnuReporteClientes.Click += new System.EventHandler(this.mnuReporteClientes_Click);
+            //
+            // mnuCocina
+            //
+            this.mnuCocina.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuPedidosCocina});
+            this.mnuCocina.Name = "mnuCocina";
+            this.mnuCocina.Size = new System.Drawing.Size(56, 20);
+            this.mnuCocina.Text = "&Cocina";
+            //
+            // mnuPedidosCocina
+            //
+            this.mnuPedidosCocina.Name = "mnuPedidosCocina";
+            this.mnuPedidosCocina.Size = new System.Drawing.Size(180, 22);
+            this.mnuPedidosCocina.Text = "Pedidos";
+            this.mnuPedidosCocina.Click += new System.EventHandler(this.mnuPedidosCocina_Click);
             //
             // mnuSalir
             //
@@ -193,11 +247,17 @@ namespace Restaurant.Presentacion
         private System.Windows.Forms.ToolStripMenuItem mnuMesas;
         private System.Windows.Forms.ToolStripMenuItem mnuEmpleados;
         private System.Windows.Forms.ToolStripMenuItem mnuClientes;
+        private System.Windows.Forms.ToolStripMenuItem mnuUsuarios;
         private System.Windows.Forms.ToolStripMenuItem mnuOperaciones;
         private System.Windows.Forms.ToolStripMenuItem mnuNuevoPedido;
         private System.Windows.Forms.ToolStripMenuItem mnuFacturacion;
         private System.Windows.Forms.ToolStripMenuItem mnuReportes;
         private System.Windows.Forms.ToolStripMenuItem mnuReporteVentas;
+        private System.Windows.Forms.ToolStripMenuItem mnuPlatosVendidos;
+        private System.Windows.Forms.ToolStripMenuItem mnuVentasEmpleado;
+        private System.Windows.Forms.ToolStripMenuItem mnuReporteClientes;
+        private System.Windows.Forms.ToolStripMenuItem mnuCocina;
+        private System.Windows.Forms.ToolStripMenuItem mnuPedidosCocina;
         private System.Windows.Forms.ToolStripMenuItem mnuSalir;
         private System.Windows.Forms.StatusStrip statusBar;
         private System.Windows.Forms.ToolStripStatusLabel lblUsuario;

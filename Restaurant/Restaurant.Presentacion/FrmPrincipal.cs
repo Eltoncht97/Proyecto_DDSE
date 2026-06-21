@@ -29,6 +29,56 @@ namespace Restaurant.Presentacion
             lblFecha.Text = DateTime.Now.ToString("dddd, dd 'de' MMMM 'de' yyyy");
 
             AplicarFondo();
+            AplicarPermisos();
+        }
+
+        // Habilita u oculta cada opción del menú según el rol del usuario que inició sesión.
+        private void AplicarPermisos()
+        {
+            string rol = Program.UsuarioActual == null ? string.Empty : (Program.UsuarioActual.Rol ?? string.Empty);
+            bool admin = rol.Equals("Administrador", StringComparison.OrdinalIgnoreCase);
+            bool cajero = rol.Equals("Cajero", StringComparison.OrdinalIgnoreCase);
+            bool mozo = rol.Equals("Mozo", StringComparison.OrdinalIgnoreCase);
+            bool cocinero = rol.Equals("Cocinero", StringComparison.OrdinalIgnoreCase);
+
+            // Mantenimientos
+            mnuCategorias.Visible = admin;
+            mnuPlatos.Visible = admin;
+            mnuEmpleados.Visible = admin;
+            mnuUsuarios.Visible = admin;
+            mnuClientes.Visible = admin || cajero || mozo;
+            mnuMesas.Visible = admin || cajero || mozo;
+
+            // Operaciones
+            mnuNuevoPedido.Visible = admin || cajero || mozo;
+            mnuFacturacion.Visible = admin || cajero;
+
+            // Reportes (todos)
+            bool reportes = admin || cajero;
+            mnuReporteVentas.Visible = reportes;
+            mnuPlatosVendidos.Visible = reportes;
+            mnuVentasEmpleado.Visible = reportes;
+            mnuReporteClientes.Visible = reportes;
+
+            // Cocina
+            mnuPedidosCocina.Visible = admin || cocinero;
+
+            // Menús de nivel superior: visibles solo si tienen alguna opción visible.
+            mnuMantenimientos.Visible = TieneHijoVisible(mnuMantenimientos);
+            mnuOperaciones.Visible = TieneHijoVisible(mnuOperaciones);
+            mnuReportes.Visible = TieneHijoVisible(mnuReportes);
+            mnuCocina.Visible = TieneHijoVisible(mnuCocina);
+
+            // El cocinero solo trabaja en la ventana de cocina; se abre automáticamente.
+            if (cocinero)
+                AbrirHijo(new FrmCocinero());
+        }
+
+        private static bool TieneHijoVisible(ToolStripMenuItem menu)
+        {
+            foreach (ToolStripItem item in menu.DropDownItems)
+                if (item.Available) return true;
+            return false;
         }
 
         private void AplicarFondo()
@@ -47,8 +97,8 @@ namespace Restaurant.Presentacion
                         .GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic)
                         .SetValue(area, true, null);
 
-                    area.Paint += AreaMdi_Paint;     // dibujamos el fondo a mano
-                    area.Resize += AreaMdi_Resize;   // redibujar al cambiar el tamaño
+                    area.Paint += AreaMdi_Paint;
+                    area.Resize += AreaMdi_Resize; 
                     area.Invalidate();
                     break;
                 }
@@ -111,9 +161,14 @@ namespace Restaurant.Presentacion
         private void mnuMesas_Click(object sender, EventArgs e) { AbrirHijo(new FrmMesa()); }
         private void mnuEmpleados_Click(object sender, EventArgs e) { AbrirHijo(new FrmEmpleado()); }
         private void mnuClientes_Click(object sender, EventArgs e) { AbrirHijo(new FrmCliente()); }
+        private void mnuUsuarios_Click(object sender, EventArgs e) { AbrirHijo(new FrmUsuario()); }
+        private void mnuPedidosCocina_Click(object sender, EventArgs e) { AbrirHijo(new FrmCocinero()); }
         private void mnuNuevoPedido_Click(object sender, EventArgs e) { AbrirHijo(new FrmPedido()); }
         private void mnuFacturacion_Click(object sender, EventArgs e) { AbrirHijo(new FrmFacturacion()); }
         private void mnuReporteVentas_Click(object sender, EventArgs e) { AbrirHijo(new FrmReporteVentas()); }
+        private void mnuPlatosVendidos_Click(object sender, EventArgs e) { AbrirHijo(new FrmReportePlatosVendidos()); }
+        private void mnuVentasEmpleado_Click(object sender, EventArgs e) { AbrirHijo(new FrmReporteEmpleados()); }
+        private void mnuReporteClientes_Click(object sender, EventArgs e) { AbrirHijo(new FrmReporteClientes()); }
 
         private void mnuSalir_Click(object sender, EventArgs e)
         {

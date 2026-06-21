@@ -14,5 +14,26 @@ namespace Restaurant.Negocio
                 throw new ApplicationException("La fecha de inicio no puede ser mayor que la fecha fin.");
             return _dao.VentasPorFecha(fechaInicio, fechaFin);
         }
+
+        public DataTable PlatosMasVendidos(DateTime fechaInicio, DateTime fechaFin)
+        {
+            if (fechaInicio > fechaFin)
+                throw new ApplicationException("La fecha de inicio no puede ser mayor que la fecha fin.");
+            return _dao.PlatosMasVendidos(fechaInicio, fechaFin);
+        }
+
+        public DataTable VentasPorEmpleado(DateTime fechaInicio, DateTime fechaFin)
+        {
+            if (fechaInicio > fechaFin)
+                throw new ApplicationException("La fecha de inicio no puede ser mayor que la fecha fin.");
+            return _dao.VentasPorEmpleado(fechaInicio, fechaFin);
+        }
+
+        public DataTable ReporteClientes(DateTime fechaInicio, DateTime fechaFin)
+        {
+            if (fechaInicio > fechaFin)
+                throw new ApplicationException("La fecha de inicio no puede ser mayor que la fecha fin.");
+            return _dao.ReporteClientes(fechaInicio, fechaFin);
+        }
     }
 }

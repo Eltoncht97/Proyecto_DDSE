@@ -32,6 +32,7 @@ namespace Restaurant.Presentacion
             TemaModerno.EstilizarBotonSecundario(btnRefrescar);
             btnFacturar.Text = IconosUI.Facturar;
             btnRefrescar.Text = IconosUI.Refrescar;
+            btnRefrescar.Height = 26;   // compacto: queda arriba de la grilla, no la tapa
 
             cboTipo.Items.AddRange(new object[] { "Boleta", "Factura" });
             cboTipo.SelectedItem = "Boleta";
@@ -92,6 +93,7 @@ namespace Restaurant.Presentacion
             if (dgvDetalle.Columns.Contains("IdDetalle")) dgvDetalle.Columns["IdDetalle"].Visible = false;
             if (dgvDetalle.Columns.Contains("IdPedido")) dgvDetalle.Columns["IdPedido"].Visible = false;
             if (dgvDetalle.Columns.Contains("IdPlato")) dgvDetalle.Columns["IdPlato"].Visible = false;
+            if (dgvDetalle.Columns.Contains("EstadoDetalle")) dgvDetalle.Columns["EstadoDetalle"].Visible = false;
             dgvDetalle.Columns["Plato"].HeaderText = "Plato";
             dgvDetalle.Columns["Cantidad"].HeaderText = "Cant.";
             dgvDetalle.Columns["PrecioUnitario"].HeaderText = "P. Unit.";

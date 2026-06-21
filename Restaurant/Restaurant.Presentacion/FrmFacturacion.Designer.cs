@@ -141,9 +141,9 @@ namespace Restaurant.Presentacion
             //
             // btnRefrescar
             //
-            this.btnRefrescar.Location = new System.Drawing.Point(636, 64);
+            this.btnRefrescar.Location = new System.Drawing.Point(636, 40);
             this.btnRefrescar.Name = "btnRefrescar";
-            this.btnRefrescar.Size = new System.Drawing.Size(140, 28);
+            this.btnRefrescar.Size = new System.Drawing.Size(140, 26);
             this.btnRefrescar.TabIndex = 10;
             this.btnRefrescar.Text = "Refrescar";
             this.btnRefrescar.UseVisualStyleBackColor = true;

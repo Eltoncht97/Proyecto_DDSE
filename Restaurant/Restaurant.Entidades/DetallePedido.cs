@@ -8,6 +8,7 @@ namespace Restaurant.Entidades
         public string Plato { get; set; }       // nombre del plato (para grillas)
         public int Cantidad { get; set; }
         public decimal PrecioUnitario { get; set; }
+        public string EstadoDetalle { get; set; }   // Solicitado / Servido (estado de cocina)
 
         public decimal Subtotal
         {
@@ -17,6 +18,7 @@ namespace Restaurant.Entidades
         public DetallePedido()
         {
             Cantidad = 1;
+            EstadoDetalle = "Solicitado";
         }
     }
 }
