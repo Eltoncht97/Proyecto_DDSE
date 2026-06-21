@@ -208,7 +208,7 @@ namespace Restaurant.Presentacion
             this.Controls.Add(this.lblTitulo);
             this.Name = "FrmUsuario";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "          ";
+            this.Text = "Usuarios";
             this.Load += new System.EventHandler(this.FrmUsuario_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).EndInit();
             this.ResumeLayout(false);

@@ -165,7 +165,7 @@ namespace Restaurant.Presentacion
             this.Controls.Add(this.lblTitulo);
             this.Name = "FrmCategoria";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "          ";
+            this.Text = "Categorías";
             this.Load += new System.EventHandler(this.FrmCategoria_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).EndInit();
             this.ResumeLayout(false);

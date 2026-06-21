@@ -130,7 +130,7 @@ namespace Restaurant.Presentacion
             this.Controls.Add(this.lblTitulo);
             this.Name = "FrmCocinero";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "          ";
+            this.Text = "Pedidos en preparación";
             this.Load += new System.EventHandler(this.FrmCocinero_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPedidos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalle)).EndInit();
