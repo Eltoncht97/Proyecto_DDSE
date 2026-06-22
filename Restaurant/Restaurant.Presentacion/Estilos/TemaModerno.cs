@@ -6,10 +6,6 @@ using System.Windows.Forms;
 
 namespace Restaurant.Presentacion.Estilos
 {
-    /// <summary>
-    /// Tema visual de la aplicación: paleta 100% en escala de grises,
-    /// estilo minimalista y plano. Sin azules ni colores de acento.
-    /// </summary>
     public static class TemaModerno
     {
         public static class Colores
@@ -247,7 +243,6 @@ namespace Restaurant.Presentacion.Estilos
             panel.Dock = DockStyle.Top;
         }
 
-        /// <summary>Menú superior en grises planos.</summary>
         public static void EstilizarMenu(MenuStrip menu)
         {
             menu.BackColor = Colores.Primario;
@@ -258,7 +253,6 @@ namespace Restaurant.Presentacion.Estilos
                 item.ForeColor = Colores.Blanco;
         }
 
-        /// <summary>Barra de estado inferior en gris claro.</summary>
         public static void EstilizarStatus(StatusStrip status)
         {
             status.BackColor = Colores.Fondo;

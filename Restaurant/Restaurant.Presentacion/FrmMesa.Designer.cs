@@ -40,24 +40,27 @@ namespace Restaurant.Presentacion
             this.lblTitulo.AutoSize = true;
             this.lblTitulo.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.lblTitulo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
-            this.lblTitulo.Location = new System.Drawing.Point(14, 10);
+            this.lblTitulo.Location = new System.Drawing.Point(19, 12);
+            this.lblTitulo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(235, 25);
+            this.lblTitulo.Size = new System.Drawing.Size(303, 32);
             this.lblTitulo.TabIndex = 0;
             this.lblTitulo.Text = "Mantenimiento de Mesas";
             // 
             // lblNumero
             // 
             this.lblNumero.AutoSize = true;
-            this.lblNumero.Location = new System.Drawing.Point(17, 48);
+            this.lblNumero.Location = new System.Drawing.Point(23, 59);
+            this.lblNumero.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNumero.Name = "lblNumero";
-            this.lblNumero.Size = new System.Drawing.Size(47, 13);
+            this.lblNumero.Size = new System.Drawing.Size(58, 16);
             this.lblNumero.TabIndex = 1;
             this.lblNumero.Text = "Número:";
             // 
             // nudNumero
             // 
-            this.nudNumero.Location = new System.Drawing.Point(103, 45);
+            this.nudNumero.Location = new System.Drawing.Point(137, 55);
+            this.nudNumero.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.nudNumero.Maximum = new decimal(new int[] {
             999,
             0,
@@ -69,7 +72,7 @@ namespace Restaurant.Presentacion
             0,
             0});
             this.nudNumero.Name = "nudNumero";
-            this.nudNumero.Size = new System.Drawing.Size(103, 20);
+            this.nudNumero.Size = new System.Drawing.Size(137, 22);
             this.nudNumero.TabIndex = 2;
             this.nudNumero.Value = new decimal(new int[] {
             1,
@@ -80,15 +83,17 @@ namespace Restaurant.Presentacion
             // lblCapacidad
             // 
             this.lblCapacidad.AutoSize = true;
-            this.lblCapacidad.Location = new System.Drawing.Point(17, 76);
+            this.lblCapacidad.Location = new System.Drawing.Point(23, 94);
+            this.lblCapacidad.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCapacidad.Name = "lblCapacidad";
-            this.lblCapacidad.Size = new System.Drawing.Size(61, 13);
+            this.lblCapacidad.Size = new System.Drawing.Size(77, 16);
             this.lblCapacidad.TabIndex = 3;
             this.lblCapacidad.Text = "Capacidad:";
             // 
             // nudCapacidad
             // 
-            this.nudCapacidad.Location = new System.Drawing.Point(103, 74);
+            this.nudCapacidad.Location = new System.Drawing.Point(137, 91);
+            this.nudCapacidad.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.nudCapacidad.Maximum = new decimal(new int[] {
             50,
             0,
@@ -100,7 +105,7 @@ namespace Restaurant.Presentacion
             0,
             0});
             this.nudCapacidad.Name = "nudCapacidad";
-            this.nudCapacidad.Size = new System.Drawing.Size(103, 20);
+            this.nudCapacidad.Size = new System.Drawing.Size(137, 22);
             this.nudCapacidad.TabIndex = 4;
             this.nudCapacidad.Value = new decimal(new int[] {
             4,
@@ -111,35 +116,39 @@ namespace Restaurant.Presentacion
             // lblUbicacion
             // 
             this.lblUbicacion.AutoSize = true;
-            this.lblUbicacion.Location = new System.Drawing.Point(17, 105);
+            this.lblUbicacion.Location = new System.Drawing.Point(23, 129);
+            this.lblUbicacion.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblUbicacion.Name = "lblUbicacion";
-            this.lblUbicacion.Size = new System.Drawing.Size(58, 13);
+            this.lblUbicacion.Size = new System.Drawing.Size(71, 16);
             this.lblUbicacion.TabIndex = 5;
             this.lblUbicacion.Text = "Ubicación:";
             // 
             // txtUbicacion
             // 
-            this.txtUbicacion.Location = new System.Drawing.Point(103, 102);
+            this.txtUbicacion.Location = new System.Drawing.Point(137, 126);
+            this.txtUbicacion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtUbicacion.MaxLength = 60;
             this.txtUbicacion.Name = "txtUbicacion";
-            this.txtUbicacion.Size = new System.Drawing.Size(210, 20);
+            this.txtUbicacion.Size = new System.Drawing.Size(279, 22);
             this.txtUbicacion.TabIndex = 6;
             // 
             // lblSituacion
             // 
             this.lblSituacion.AutoSize = true;
-            this.lblSituacion.Location = new System.Drawing.Point(17, 133);
+            this.lblSituacion.Location = new System.Drawing.Point(23, 164);
+            this.lblSituacion.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSituacion.Name = "lblSituacion";
-            this.lblSituacion.Size = new System.Drawing.Size(54, 13);
+            this.lblSituacion.Size = new System.Drawing.Size(65, 16);
             this.lblSituacion.TabIndex = 7;
             this.lblSituacion.Text = "Situación:";
             // 
             // cboSituacion
             // 
             this.cboSituacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboSituacion.Location = new System.Drawing.Point(103, 131);
+            this.cboSituacion.Location = new System.Drawing.Point(137, 161);
+            this.cboSituacion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cboSituacion.Name = "cboSituacion";
-            this.cboSituacion.Size = new System.Drawing.Size(129, 21);
+            this.cboSituacion.Size = new System.Drawing.Size(171, 24);
             this.cboSituacion.TabIndex = 8;
             // 
             // chkEstado
@@ -147,18 +156,20 @@ namespace Restaurant.Presentacion
             this.chkEstado.AutoSize = true;
             this.chkEstado.Checked = true;
             this.chkEstado.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkEstado.Location = new System.Drawing.Point(257, 133);
+            this.chkEstado.Location = new System.Drawing.Point(343, 164);
+            this.chkEstado.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkEstado.Name = "chkEstado";
-            this.chkEstado.Size = new System.Drawing.Size(56, 17);
+            this.chkEstado.Size = new System.Drawing.Size(66, 20);
             this.chkEstado.TabIndex = 9;
             this.chkEstado.Text = "Activo";
             this.chkEstado.UseVisualStyleBackColor = true;
             // 
             // btnNuevo
             // 
-            this.btnNuevo.Location = new System.Drawing.Point(103, 165);
+            this.btnNuevo.Location = new System.Drawing.Point(137, 203);
+            this.btnNuevo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnNuevo.Name = "btnNuevo";
-            this.btnNuevo.Size = new System.Drawing.Size(86, 28);
+            this.btnNuevo.Size = new System.Drawing.Size(115, 34);
             this.btnNuevo.TabIndex = 10;
             this.btnNuevo.Text = "Nuevo";
             this.btnNuevo.UseVisualStyleBackColor = true;
@@ -169,9 +180,10 @@ namespace Restaurant.Presentacion
             this.btnGuardar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(70)))), ((int)(((byte)(70)))));
             this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGuardar.ForeColor = System.Drawing.Color.White;
-            this.btnGuardar.Location = new System.Drawing.Point(194, 165);
+            this.btnGuardar.Location = new System.Drawing.Point(259, 203);
+            this.btnGuardar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(86, 28);
+            this.btnGuardar.Size = new System.Drawing.Size(115, 34);
             this.btnGuardar.TabIndex = 11;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = false;
@@ -179,9 +191,10 @@ namespace Restaurant.Presentacion
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(285, 165);
+            this.btnEliminar.Location = new System.Drawing.Point(380, 203);
+            this.btnEliminar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(86, 28);
+            this.btnEliminar.Size = new System.Drawing.Size(115, 34);
             this.btnEliminar.TabIndex = 12;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
@@ -189,9 +202,10 @@ namespace Restaurant.Presentacion
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(375, 165);
+            this.btnCancelar.Location = new System.Drawing.Point(500, 203);
+            this.btnCancelar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(86, 28);
+            this.btnCancelar.Size = new System.Drawing.Size(115, 34);
             this.btnCancelar.TabIndex = 13;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
@@ -205,21 +219,23 @@ namespace Restaurant.Presentacion
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvLista.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvLista.Location = new System.Drawing.Point(14, 204);
+            this.dgvLista.Location = new System.Drawing.Point(19, 251);
+            this.dgvLista.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvLista.MultiSelect = false;
             this.dgvLista.Name = "dgvLista";
             this.dgvLista.ReadOnly = true;
             this.dgvLista.RowHeadersVisible = false;
+            this.dgvLista.RowHeadersWidth = 51;
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLista.Size = new System.Drawing.Size(645, 217);
+            this.dgvLista.Size = new System.Drawing.Size(860, 267);
             this.dgvLista.TabIndex = 14;
             this.dgvLista.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_CellClick);
             // 
             // FrmMesa
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(671, 438);
+            this.ClientSize = new System.Drawing.Size(895, 539);
             this.Controls.Add(this.dgvLista);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnEliminar);
@@ -235,9 +251,10 @@ namespace Restaurant.Presentacion
             this.Controls.Add(this.nudNumero);
             this.Controls.Add(this.lblNumero);
             this.Controls.Add(this.lblTitulo);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FrmMesa";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Mesas";
+            this.Text = " ";
             this.Load += new System.EventHandler(this.FrmMesa_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudNumero)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCapacidad)).EndInit();

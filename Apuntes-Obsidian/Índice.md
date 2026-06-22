@@ -10,6 +10,9 @@ Esta nota es el **centro** del vault: desde aquí llegas a todo.
 > Ábrelo con **Obsidian** (Archivo → Abrir carpeta como vault → elige la carpeta `Apuntes-Obsidian`).
 > Pulsa el ícono de **grafo** (⚙️ a la izquierda) para ver cómo se conectan las notas.
 
+> [!example] ¿Buscas dónde está el código de una ventana o botón?
+> → [[Mapa de Código]] — rutas y números de línea exactos de cada formulario, botón, BLL, DAO y procedimiento almacenado.
+
 ## 🧭 Ruta de estudio recomendada
 1. [[Arquitectura multicapa]] — la idea general (las 4 capas)
 2. [[Capa de Entidades]] · [[POO - Clase y Objeto]]

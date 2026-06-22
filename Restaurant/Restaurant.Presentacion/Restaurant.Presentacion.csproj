@@ -157,6 +157,7 @@
     <EmbeddedResource Include="Recursos\fondo_app.png" />
     <EmbeddedResource Include="Recursos\fondo2.png" />
     <EmbeddedResource Include="Recursos\Imagenes\categoria.png" />
+    <EmbeddedResource Include="Recursos\Imagenes\Usuario.png" />
     <EmbeddedResource Include="Recursos\Imagenes\plato.png" />
     <EmbeddedResource Include="Recursos\Imagenes\empleado.png" />
     <EmbeddedResource Include="Recursos\Imagenes\cliente.png" />

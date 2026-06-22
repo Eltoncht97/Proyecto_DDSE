@@ -19,8 +19,17 @@ namespace Restaurant.Datos
                 cmd.Parameters.AddWithValue("@SubTotal", c.SubTotal);
                 cmd.Parameters.AddWithValue("@Igv", c.Igv);
                 cmd.Parameters.AddWithValue("@Total", c.Total);
+
+                SqlParameter pNumero = new SqlParameter("@Numero", SqlDbType.Int)
+                {
+                    Direction = ParameterDirection.Output
+                };
+                cmd.Parameters.Add(pNumero);
+
                 cn.Open();
-                return Convert.ToInt32(cmd.ExecuteScalar());
+                int idComprobante = Convert.ToInt32(cmd.ExecuteScalar());
+                c.Numero = Convert.ToInt32(pNumero.Value);   // correlativo calculado por el SP
+                return idComprobante;
             }
         }
     }

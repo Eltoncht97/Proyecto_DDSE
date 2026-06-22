@@ -483,11 +483,11 @@ GO
 GO
 CREATE PROCEDURE dbo.usp_Comprobante_Insertar
     @IdPedido INT, @Tipo NVARCHAR(10), @Serie NVARCHAR(6),
-    @SubTotal DECIMAL(10,2), @Igv DECIMAL(10,2), @Total DECIMAL(10,2)
+    @SubTotal DECIMAL(10,2), @Igv DECIMAL(10,2), @Total DECIMAL(10,2),
+    @Numero INT OUTPUT
 AS
 BEGIN
     SET NOCOUNT ON;
-    DECLARE @Numero INT;
     SELECT @Numero = ISNULL(MAX(Numero), 0) + 1 FROM dbo.Comprobante WHERE Serie = @Serie;
 
     INSERT INTO dbo.Comprobante (IdPedido, Tipo, Serie, Numero, Fecha, SubTotal, Igv, Total)

@@ -43,7 +43,7 @@ namespace Restaurant.Presentacion
             LimpiarFormulario();
 
             TemaModerno.UniformarEntradas(this, 380);
-            TemaModerno.AgregarTarjetaReferencia(this, "empleado.png");
+            TemaModerno.AgregarTarjetaReferencia(this, "Usuario.png");
             TemaModerno.AplicarBarraTitulo(this);
         }
 

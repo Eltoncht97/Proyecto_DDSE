@@ -19,7 +19,7 @@ namespace Restaurant.Presentacion
 
         private void FrmMesa_Load(object sender, EventArgs e)
         {
-            TemaModerno.EstilizarFormulario(this);
+             TemaModerno.EstilizarFormulario(this);
             TemaModerno.EstilizarTitulo(lblTitulo);
             TemaModerno.EstilizarNumericUpDown(nudNumero);
             TemaModerno.EstilizarNumericUpDown(nudCapacidad);
